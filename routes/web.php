@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\customerController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +20,20 @@ Route::get('/', function () {
     return view('welcome');
 })->name('admindashboard');
 
+
+//product controller
+Route::get('/product',[ProductController::class,'index'])->name('product.index');
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+
+
+
+
+
+//customercontroller
+Route::get('/user',[customerController::class,'index'])->name('customer.index');
+Route::post('/user/add',[customerController::class,'store'])->name('customer.store');
+
+
+//ordercontroller
+Route::get('/orders',[OrderController::class,'index'])->name('order.index');
