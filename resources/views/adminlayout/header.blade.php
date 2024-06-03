@@ -1001,7 +1001,7 @@
                     </a>
                     <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
                         <div class="menu-item">
-                            <a class="menu-link active py-3" href="{{ asset('../../demo11/dist/index.html') }}">
+                            <a class="menu-link active py-3" href="{{ route('admindashboard') }}">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
                                     <span class="svg-icon svg-icon-2">
