@@ -22,133 +22,7 @@
             <!--end::Search-->
         </div>
         <!--begin::Card title-->
-        <!--begin::Card toolbar-->
-        <div class="card-toolbar">
-            <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-             
-           
-                <!--begin::Add user-->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                <span class="svg-icon svg-icon-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->Add User</button>
-                <!--end::Add user-->
-            </div>
-   
-            <div class="modal fade" id="kt_modal_export_users" tabindex="-1" aria-hidden="true">
-                <!--begin::Modal dialog-->
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <!--begin::Modal content-->
-                    
-                </div>
-                <!--end::Modal dialog-->
-            </div>
-            <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
-                <!--begin::Modal dialog-->
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <!--begin::Modal content-->
-                    <div class="modal-content">
-                        <!--begin::Modal header-->
-                        <div class="modal-header" id="kt_modal_add_user_header">
-                            <!--begin::Modal title-->
-                            <h2 class="fw-bolder">Add User</h2>
-                            <!--end::Modal title-->
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </div>
-                            <!--end::Close-->
-                        </div>
-                        <!--end::Modal header-->
-                        <!--begin::Modal body-->
-                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                            <!--begin::Form-->
-                            <form id="kt_modal_add_user_form" class="form" action="{{ route('customer.store') }}" method="POST">
-                                <!--begin::Scroll-->
-                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Full Name</label>
-                                    
-                                        <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Email</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Phone</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="tel" name="phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Phone number" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Password</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div class="input-group">
-                                            <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Password" />
-                                            <button type="button" class="btn btn-light" id="togglePassword">
-                                                <i class="bi bi-eye"></i>
-                                            </button>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                </div>
-                                <!--end::Scroll-->
-                                <!--begin::Actions-->
-                                <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                    <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                        <span class="indicator-label">Submit</span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                        </span>
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                            </form>
-                            <!--end::Form-->
-                        </div>
-                        <!--end::Modal body-->
-                    </div>
-                    <!--end::Modal content-->
-                </div>
-                <!--end::Modal dialog-->
-            </div>
-            <!--end::Modal - Add task-->
-            
-        </div>
-        <!--end::Card toolbar-->
+       
     </div>
     
     <div class="card-body pt-0">
@@ -158,11 +32,12 @@
             <thead>
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                    <th class="min-w-125px">User</th>
-                    <th class="min-w-125px">Phone</th>
-                    <th class="min-w-125px">Account Status</th>
-                    <th class="min-w-125px">Last login</th>
-                    <th class="min-w-125px">Joined Date</th>
+                    <th class="min-w-125px">Order ID</th>
+                    <th class="min-w-125px">Customer Name</th>
+                    <th class="min-w-125px">Total Amount</th>
+                    <th class="min-w-125px">Payment Method</th>
+                    <th class="min-w-125px">Paid At</th>
+                    <th class="min-w-125px">Shipping Address</th>
                     <th class="text-end min-w-100px">Actions</th>
                 </tr>
                 <!--end::Table row-->
@@ -187,24 +62,25 @@
                             <!--end::Avatar-->
                             <!--begin::User details-->
                             <div class="d-flex flex-column">
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $orders->name }}</a>
-                                <span>{{ $orders->email }}</span>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $orders->order_id }}</a>
+                                {{-- <span>{{ $orders->email }}</span> --}}
                             </div>
                             <!--end::User details-->
                         </td>
                         <!--end::User-->
+                        <td>{{ $orders->customer_name }}</td>
                         <!--begin::Role-->
-                        <td>{{ $orders->phone }}</td>
-                        <td>{{  $orders->accountstatus == 0 ? 'Active' : 'Disable' }}</td>
+                        <td>{{ $orders->total_amount }}</td>
+                        <td>{{  $orders->payment_method == 0 ? 'Active' : 'Disable' }}</td>
                         
                         <!--end::Role-->
                         <!--begin::Last login-->
                         <td>
-                            <div class="badge badge-light fw-bolder">{{ $orders->updated_at }}</div>
+                            <div class="badge badge-light fw-bolder">{{ $orders->paid_at }}</div>
                         </td>
                         <!--end::Last login-->
                         <!--begin::Joined-->
-                        <td>{{ $orders->created_at }}</td>
+                        <td>{{ $orders->shipping_address }}</td>
                         <!--end::Joined-->
                         <!--begin::Action-->
                         <td class="text-end">
@@ -247,9 +123,5 @@
 
 
 @endsection
-@push('script')
 
-<script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
-
-@endpush
 

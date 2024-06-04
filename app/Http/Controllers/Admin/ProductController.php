@@ -17,8 +17,6 @@ class ProductController extends Controller
 
     public function store(productStoreRequest $request)
 {
-    
-
     // Save product to database
     $product = new Product();
     $product->name = $request->name;
@@ -28,18 +26,19 @@ class ProductController extends Controller
     $product->fulldescription = $request->full_description;
     $product->stock = $request->stock;
     $product->price = $request->price;
-    $product->SKU = str::uuid();
+    $product->SKU = Str::uuid(); // Ensure 'Str' is correctly imported
 
     // Handle file upload if you have a photo field
     if ($request->hasFile('photo')) {
         $file = $request->file('photo');
         $fileName = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('uploads'), $fileName); // Adjust folder path as needed
-        $product->photo = $fileName;
+        $product->photo = 'uploads/' . $fileName; // Add missing slash
     }
 
     $product->save();
 
     return redirect()->back()->with('success', 'Product added successfully!');
 }
+
 }

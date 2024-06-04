@@ -88,7 +88,7 @@
                                 <!--begin::Modal body-->
                                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                     <!--begin::Form-->
-                                    <form id="kt_modal_add_product_form" class="form" action="{{ route('product.store') }}" method="POST">
+                                    <form id="kt_modal_add_product_form" class="form" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                       
                                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll"
@@ -221,6 +221,7 @@
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-125px">Name</th>
                             <th class="min-w-125px">Price</th>
+                            <th class="min-w-125px">Image</th>
                             <th class="min-w-125px">Category</th>
                             <th class="min-w-125px">Basic Description</th>
                             <th class="min-w-125px">Full Description</th>
@@ -236,13 +237,14 @@
                         @foreach ($product as $products)
                             <tr>
                                 <!--begin::Product Name-->
-                                <td class="d-flex align-items-center">
+                                <td >
                                     {{ $products->name }}
                                 </td>
                                 <!--end::Product Name-->
                                 <!--begin::Price-->
                                 <td>{{ $products->price }}</td>
                                 <!--end::Price-->
+                                <td><img src="{{ asset($products->photo) }}" style="width:100px" alt="photo"></td>
                                 <!--begin::Category-->
                                 <td>{{ $products->category }}</td>
                                 <!--end::Category-->
