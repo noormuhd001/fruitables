@@ -29,16 +29,12 @@ Route::get('/product/edit/{id}',[ProductController::class,'edit'])->name('produc
 Route::post('/product/update',[ProductController::class,'update'])->name('product.update');
 Route::get('/product/{id}/delete',[ProductController::class,'delete'])->name('product.delete');
 
-
-
-
-
-
 //customercontroller
 Route::get('/user',[customerController::class,'index'])->name('customer.index');
 Route::post('/user/add',[customerController::class,'store'])->name('customer.store');
-
-
+Route::get('/product/edit/{id}',[customerController::class,'edit'])->name('customer.edit');
+Route::post('/product/update',[CustomerController::class,'update'])->name('customer.update');
+Route::get('/product/delete/{id}',[customerController::class,'delete'])->name('customer.delete');
 //ordercontroller
 Route::get('/orders',[OrderController::class,'index'])->name('order.index');
 

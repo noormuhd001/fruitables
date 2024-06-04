@@ -1,6 +1,28 @@
 @extends('admin.layout.layout')
 
 @section('section')
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+@if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            });
+        </script>
+    @endif
 
 <div class="container">
   <div class="card">
@@ -77,7 +99,7 @@
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
                             <form id="kt_modal_add_user_form" class="form" action="{{ route('customer.store') }}" method="POST">
-                                <!--begin::Scroll-->
+                              @csrf
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-7">
@@ -221,12 +243,12 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Edit</a>
+                                    <a href="{{ route('customer.edit', ['id' => $user->id]) }}" class="menu-link px-3">Edit</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Delete</a>
+                                    <a href="{{ route('customer.delete',['id' => $user->id]) }}" class="menu-link px-3">Delete</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
@@ -248,7 +270,7 @@
 
 @endsection
 @push('script')
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
 
 @endpush
