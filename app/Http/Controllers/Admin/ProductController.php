@@ -65,6 +65,13 @@ public function update(productUpdateRequest $request){
 
     return redirect()->route('product.index')->with('success','product edited successfully');
 }
+public function delete($id){
+
+    $product = product::findorfail($id);
+    $product->delete();
+    
+    return redirect()->back()->with('success','product deleted successfully');
+}
 }
 
 

@@ -280,7 +280,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('product.delete',['id' => $products->id]) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
