@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\productmanagement\productStoreRequest;
+use App\Models\categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class ProductController extends Controller
@@ -12,7 +13,8 @@ class ProductController extends Controller
 
     public function index(){
         $product = Product::all();
-        return view('admin.product.index',['product'=>$product]);
+        $category = categories::all();
+        return view('admin.product.index',['product'=>$product,'category'=>$category]);
     }
 
     public function store(productStoreRequest $request)
@@ -37,8 +39,9 @@ class ProductController extends Controller
     }
 
     $product->save();
+    return redirect()->back()->with('success', 'product added successfully!');   
+ }
 
-    return redirect()->back()->with('success', 'Product added successfully!');
 }
 
-}
+

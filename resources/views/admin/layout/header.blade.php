@@ -1041,7 +1041,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link active py-3" href="{{ asset('../../demo11/dist/inde66x.html') }}">
+                            <a class="menu-link active py-3" href="{{ route('category.index') }}">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
                                     <span class="svg-icon svg-icon-2">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\customerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,8 @@ Route::post('/user/add',[customerController::class,'store'])->name('customer.sto
 
 //ordercontroller
 Route::get('/orders',[OrderController::class,'index'])->name('order.index');
+
+
+//categorycontroller
+Route::get('/category',[CategoryController::class,'index'])->name('category.index');
+route::post('/category/add',[CategoryController::class,'store'])->name('category.store');
