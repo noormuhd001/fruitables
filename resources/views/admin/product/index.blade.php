@@ -1,19 +1,19 @@
 @extends('admin.layout.layout')
 
 @section('section')
-@if(session('success'))
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 3000
-        });
-    });
-</script>
-@endif
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            });
+        </script>
+    @endif
     <div class="container">
         <div class="card">
             <div class="card-header border-0 pt-6">
@@ -59,7 +59,7 @@
                         </button>
                         <!--end::Add user-->
                     </div>
-                 
+
                     <div class="modal fade" id="kt_modal_export_users" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -101,9 +101,10 @@
                                 <!--begin::Modal body-->
                                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                     <!--begin::Form-->
-                                    <form id="kt_modal_add_product_form" class="form" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                    <form id="kt_modal_add_product_form" class="form"
+                                        action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                      
+
                                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll"
                                             data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                                             data-kt-scroll-max-height="auto"
@@ -139,7 +140,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="file" name="photo"
-                                                    class="form-control form-control-solid mb-3 mb-lg-0"  required/>
+                                                    class="form-control form-control-solid mb-3 mb-lg-0" required />
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
@@ -149,9 +150,10 @@
                                                 <label class="required fw-bold fs-6 mb-2">Category</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select name="category" required class="form-select form-select-solid mb-3 mb-lg-0">
+                                                <select name="category" required
+                                                    class="form-select form-select-solid mb-3 mb-lg-0">
                                                     <option value="">Select category...</option>
-                                                    @foreach($category as $c)
+                                                    @foreach ($category as $c)
                                                         <option value="{{ $c->name }}">{{ $c->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -239,36 +241,21 @@
                             <th class="min-w-125px">Stock</th>
                             <th class="text-end min-w-100px">Actions</th>
                         </tr>
-                        <!--end::Table row-->
                     </thead>
-                    <!--end::Table head-->
-                    <!--begin::Table body-->
                     <tbody class="text-gray-600 fw-bold">
                         <!--begin::Table row-->
                         @foreach ($product as $products)
                             <tr>
-                                <!--begin::Product Name-->
-                                <td >
+                                <td>
                                     {{ $products->name }}
                                 </td>
-                                <!--end::Product Name-->
-                                <!--begin::Price-->
                                 <td>{{ $products->price }}</td>
-                                <!--end::Price-->
-                                <td><img src="{{ asset($products->photo) }}" width="100px" height="100px" style="border-radius: 10px"  alt="photo"></td>
-                                <!--begin::Category-->
+                                <td><img src="{{ asset($products->photo) }}" width="100px" height="100px"
+                                        style="border-radius: 10px" alt="photo"></td>
                                 <td>{{ $products->category }}</td>
-                                <!--end::Category-->
-                                <!--begin::Basic Description-->
                                 <td>{{ $products->basicdescription }}</td>
-                                <!--end::Basic Description-->
-                                <!--begin::Full Description-->
                                 <td>{{ $products->fulldescription }}</td>
-                                <!--end::Full Description-->
-                                <!--begin::Stock-->
                                 <td>{{ $products->stock }}</td>
-                                <!--end::Stock-->
-                                <!--begin::Action-->
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
                                         data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -288,7 +275,7 @@
                                         data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('product.edit', ['id' => $products->id]) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
@@ -316,12 +303,11 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif

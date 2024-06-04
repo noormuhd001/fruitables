@@ -1037,7 +1037,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">List</span>
+                                <span class="menu-title">Product List</span>
                             </a>
                         </div>
                         <div class="menu-item">
