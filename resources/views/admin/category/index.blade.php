@@ -1,29 +1,28 @@
 @extends('admin.layout.layout')
 
 @section('section')
-
-@if(session('success'))
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('success') }}',
-                showConfirmButton: false,
-                timer: 3000
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
             });
-        });
-    </script>
-@endif
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+        </script>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 
     <div class="container">
@@ -116,38 +115,24 @@
                                     <form id="kt_modal_add_product_form" class="form"
                                         action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-
                                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll"
                                             data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                                             data-kt-scroll-max-height="auto"
                                             data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                             data-kt-scroll-wrappers="#kt_modal_add_product_scroll"
                                             data-kt-scroll-offset="300px">
-                                            <!--begin::Input group-->
                                             <div class="fv-row mb-7">
-                                                <!--begin::Label-->
                                                 <label class="required fw-bold fs-6 mb-2">Category Name</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
                                                 <input type="text" name="name"
                                                     class="form-control form-control-solid mb-3 mb-lg-0"
                                                     placeholder="Category name" required />
-                                                <!--end::Input-->
                                             </div>
-
-                                            <!--begin::Input group-->
                                             <div class="fv-row mb-7">
-                                                <!--begin::Label-->
                                                 <label class="required fw-bold fs-6 mb-2">Photo</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
                                                 <input type="file" name="photo"
                                                     class="form-control form-control-solid mb-3 mb-lg-0" required />
-                                                <!--end::Input-->
                                             </div>
-
                                         </div>
-
                                         <div class="text-center pt-15">
                                             <button type="button" class="btn btn-light me-3"
                                                 data-bs-dismiss="modal">Discard</button>
@@ -160,27 +145,16 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <!--end::Actions-->
                                     </form>
-                                    <!--end::Form-->
                                 </div>
-                                <!--end::Modal body-->
                             </div>
-                            <!--end::Modal content-->
                         </div>
-                        <!--end::Modal dialog-->
                     </div>
-                    <!--end::Modal - Add task-->
                 </div>
-                <!--end::Card toolbar-->
             </div>
-
             <div class="card-body pt-0">
-                <!--begin::Table-->
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
-                    <!--begin::Table head-->
                     <thead>
-                        <!--begin::Table row-->
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                             <th class="min-w-125px">ID</th>
                             <th class="min-w-125px">Name</th>
@@ -197,11 +171,11 @@
                                 <td>
                                     {{ $c->name }}
                                 </td>
-                                <td><img src="{{ asset($c->photo) }}" width="100px" height="100px" style="border-radius: 10px" alt="photo"></td>
+                                <td><img src="{{ asset($c->photo) }}" width="100px" height="100px"
+                                        style="border-radius: 10px" alt="photo"></td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
                                         data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                         <span class="svg-icon svg-icon-5 m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
@@ -210,37 +184,27 @@
                                                     fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->
                                     </a>
-                                    <!--begin::Menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                         data-kt-menu="true">
-                                        <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('category.edit',['id'=>$c->id]) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('category.edit', ['id' => $c->id]) }}"
+                                                class="menu-link px-3">Edit</a>
                                         </div>
-
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('category.delete',['id'=>$c->id]) }}" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('category.delete', ['id' => $c->id]) }}"
+                                                class="menu-link px-3">Delete</a>
                                         </div>
-
                                     </div>
-                                    <!--end::Menu-->
                                 </td>
-                                <!--end::Action-->
                             </tr>
                         @endforeach
-                        <!--end::Table row-->
                     </tbody>
-                    <!--end::Table body-->
                 </table>
-                <!--end::Table-->
             </div>
         </div>
     @endsection
-
     @push('scripts')
         <script src="{{ asset('Admin\assets\js\admin\formupload.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
-
