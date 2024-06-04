@@ -217,11 +217,11 @@
                                         data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('category.edit',['id'=>$c->id]) }}" class="menu-link px-3">Edit</a>
                                         </div>
 
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('category.delete',['id'=>$c->id]) }}" class="menu-link px-3">Delete</a>
                                         </div>
 
                                     </div>

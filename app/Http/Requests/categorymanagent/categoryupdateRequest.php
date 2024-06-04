@@ -24,7 +24,7 @@ class categoryupdateRequest extends FormRequest
         return [
             //
             'name' => 'required|string|max:255',
-            'photo' => '|max:2048',
+            'photo' => 'nullable|image|max:2048',
         ];
     }
     public function messages()
@@ -33,9 +33,7 @@ class categoryupdateRequest extends FormRequest
             'name.required' => 'The name field is required.',
             'name.string' => 'The name must be a string.',
             'name.max' => 'The name may not be greater than 255 characters.',
-            'photo.required' => 'The photo field is required.',
             'photo.image' => 'The file must be an image.',
-            'photo.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
             'photo.max' => 'The image may not be greater than 2MB.',
         ];
     }
