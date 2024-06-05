@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,3 +54,5 @@ Route::get('/category/{id}/delete',[CategoryController::class,'delete'])->name('
 //user
 
 Route::get('/home',[HomeController::class,'index'])->name('user.home');
+Route::get('/shop',[HomeController::class,'shop'])->name('user.shop');
+Route::get('/shop/product/{id}',[ShopController::class,'view'])->name('item.view');
