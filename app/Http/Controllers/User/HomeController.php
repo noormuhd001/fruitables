@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\categories;
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    //
+    public function index(){
+        $category = categories::all();
+        $product = Product::all();
+        return view('user.home.index',['product'=>$product,'category'=>$category]);
+    }
+}

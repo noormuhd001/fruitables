@@ -14,6 +14,17 @@
             });
         </script>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
     <div class="container">
         <div class="card">
             <div class="card-header border-0 pt-6">
@@ -42,7 +53,7 @@
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                        <!--begin::Add user-->
+                        <!--begin::Add category-->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#kt_modal_add_product">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -55,7 +66,7 @@
                                         fill="black" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Add Product
+                            <!--end::Svg Icon-->Add Category
                         </button>
                         <!--end::Add user-->
                     </div>
@@ -78,7 +89,7 @@
                                 <!--begin::Modal header-->
                                 <div class="modal-header" id="kt_modal_add_product_header">
                                     <!--begin::Modal title-->
-                                    <h2 class="fw-bolder">Add Product</h2>
+                                    <h2 class="fw-bolder">Add Category</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
                                     <button type="button" class="btn btn-icon btn-sm btn-active-icon-primary"
@@ -102,102 +113,26 @@
                                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                     <!--begin::Form-->
                                     <form id="kt_modal_add_product_form" class="form"
-                                        action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                        action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-
                                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_product_scroll"
                                             data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                                             data-kt-scroll-max-height="auto"
                                             data-kt-scroll-dependencies="#kt_modal_add_product_header"
                                             data-kt-scroll-wrappers="#kt_modal_add_product_scroll"
                                             data-kt-scroll-offset="300px">
-                                            <!--begin::Input group-->
                                             <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Product Name</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
+                                                <label class="required fw-bold fs-6 mb-2">Category Name</label>
                                                 <input type="text" name="name"
                                                     class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Product name" required />
-                                                <!--end::Input-->
+                                                    placeholder="Category name" required />
                                             </div>
                                             <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Product price</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="text" name="price"
-                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Product price" required />
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
                                                 <label class="required fw-bold fs-6 mb-2">Photo</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
                                                 <input type="file" name="photo"
                                                     class="form-control form-control-solid mb-3 mb-lg-0" required />
-                                                <!--end::Input-->
                                             </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Category</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select name="category" required
-                                                    class="form-select form-select-solid mb-3 mb-lg-0">
-                                                    <option value="">Select category...</option>
-                                                    @foreach ($category as $c)
-                                                        <option value="{{ $c->name }}">{{ $c->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Basic Description</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <textarea name="basic_description" class="form-control form-control-solid mb-3 mb-lg-0" rows="3"
-                                                    placeholder="Basic description" required></textarea>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Full Description</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <textarea name="full_description" class="form-control form-control-solid mb-3 mb-lg-0" rows="5"
-                                                    placeholder="Full description" required></textarea>
-
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-7">
-                                                <!--begin::Label-->
-                                                <label class="required fw-bold fs-6 mb-2">Stock</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" name="stock"
-                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                    placeholder="Stock" required />
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
                                         </div>
-                                        <!--end::Scroll-->
-                                        <!--begin::Actions-->
                                         <div class="text-center pt-15">
                                             <button type="button" class="btn btn-light me-3"
                                                 data-bs-dismiss="modal">Discard</button>
@@ -210,56 +145,37 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <!--end::Actions-->
                                     </form>
-                                    <!--end::Form-->
                                 </div>
-                                <!--end::Modal body-->
                             </div>
-                            <!--end::Modal content-->
                         </div>
-                        <!--end::Modal dialog-->
                     </div>
-                    <!--end::Modal - Add task-->
                 </div>
-                <!--end::Card toolbar-->
             </div>
-
             <div class="card-body pt-0">
-                <!--begin::Table-->
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
-                    <!--begin::Table head-->
                     <thead>
-                        <!--begin::Table row-->
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                            <th class="min-w-125px">ID</th>
                             <th class="min-w-125px">Name</th>
-                            <th class="min-w-125px">Price</th>
                             <th class="min-w-125px">Image</th>
-                            <th class="min-w-125px">Category</th>
-                            <th class="min-w-125px">Basic Description</th>
-                            <th class="min-w-125px">Full Description</th>
-                            <th class="min-w-125px">Stock</th>
                             <th class="text-end min-w-100px">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">
-                        <!--begin::Table row-->
-                        @foreach ($product as $products)
+                        @foreach ($category as $c)
                             <tr>
                                 <td>
-                                    {{ $products->name }}
+                                    {{ $c->id }}
                                 </td>
-                                <td>{{ $products->price }}</td>
-                                <td><img src="{{ asset($products->photo) }}" width="100px" height="100px"
+                                <td>
+                                    {{ $c->name }}
+                                </td>
+                                <td><img src="{{ asset($c->photo) }}" width="100px" height="100px"
                                         style="border-radius: 10px" alt="photo"></td>
-                                <td>{{ $products->category }}</td>
-                                <td>{{ $products->basicdescription }}</td>
-                                <td>{{ $products->fulldescription }}</td>
-                                <td>{{ $products->stock }}</td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
                                         data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                         <span class="svg-icon svg-icon-5 m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
@@ -268,46 +184,27 @@
                                                     fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->
                                     </a>
-                                    <!--begin::Menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                         data-kt-menu="true">
-                                        <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('product.edit', ['id' => $products->id]) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('category.edit', ['id' => $c->id]) }}"
+                                                class="menu-link px-3">Edit</a>
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('product.delete',['id' => $products->id]) }}" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('category.delete', ['id' => $c->id]) }}"
+                                                class="menu-link px-3">Delete</a>
                                         </div>
-                                        <!--end::Menu item-->
                                     </div>
-                                    <!--end::Menu-->
                                 </td>
-                                <!--end::Action-->
                             </tr>
                         @endforeach
-                        <!--end::Table row-->
                     </tbody>
-                    <!--end::Table body-->
                 </table>
-                <!--end::Table-->
             </div>
         </div>
     @endsection
-
     @push('scripts')
         <script src="{{ asset('Admin\assets\js\admin\formupload.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
