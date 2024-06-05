@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\customerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.layout.layout');
 })->name('admindashboard');
 
 
@@ -46,3 +47,9 @@ Route::post('/category/add',[CategoryController::class,'store'])->name('category
 Route::get('/category/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
 Route::post('/category/update',[CategoryController::class,'update'])->name('category.update');
 Route::get('/category/{id}/delete',[CategoryController::class,'delete'])->name('category.delete');
+
+
+
+//user
+
+Route::get('/home',[HomeController::class,'index'])->name('user.home');
