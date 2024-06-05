@@ -7,24 +7,17 @@
     <div class="d-flex flex-column flex-root">
         <div class="page d-flex flex-row flex-column-fluid">
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-
                 @include('admin.layout.header')
-
                 @yield('section')
-
-               @include('admin.layout.footer')
-
+                @include('admin.layout.footer')
             </div>
-
         </div>
-
     </div>
-
     <script>
         var hostUrl = "assets/";
     </script>
     @include('admin.layout.header_js')
-	@stack('script')
+    @stack('script')
 </body>
 
 </html>
