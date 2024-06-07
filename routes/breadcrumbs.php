@@ -90,4 +90,22 @@ Breadcrumbs::for('order.edit', function ($trail, $id) {
     $trail->push('Edit ' . $order->name, route('order.edit', $id));
 });
 
-//order> add
+//Offer
+
+//offer.index
+Breadcrumbs::for('offer.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Offer', route('offer.index'));
+});
+
+//OFFER> add
+Breadcrumbs::for('offer.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('offer.index');
+    $trail->push('Edit', route('offer.add'));
+});
+
+Breadcrumbs::for('offer.edit', function ($trail, $id) {
+    $trail->parent('offer.index'); // Assuming 'offer.index' is your index route
+    $offer = \App\Models\categories::findOrFail($id); // Fetch the offer
+    $trail->push('Edit ' . $offer->name, route('offer.edit', $id));
+});
+

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\customerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\Offercontroller;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\ShopController;
@@ -52,3 +53,8 @@ Route::get('/category/edit/{id}',[CategoryController::class,'edit'])->name('cate
 Route::post('/category/update',[CategoryController::class,'update'])->name('category.update');
 Route::get('/category/{id}/delete',[CategoryController::class,'delete'])->name('category.delete');
 
+//Offercontroller
+
+Route::get('/offers',[Offercontroller::class,'index'])->name('offer.index');
+Route::get('/offer/get',[Offercontroller::class,'getData'])->name('offer.list');
+Route::get('/offer/add',[Offercontroller::class,'add'])->name('offer.add');
