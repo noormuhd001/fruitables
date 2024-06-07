@@ -14,16 +14,18 @@ Breadcrumbs::for('admindashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('admindashboard'));
 });
 
+
+//PRODUCT
 Breadcrumbs::for('product.index', function (BreadcrumbTrail $trail) {
     $trail->push('Product', route('product.index'));
 });
 
-// Home > edit
+// product > edit
 Breadcrumbs::for('product.edit', function (BreadcrumbTrail $trail,$id) {
     $trail->parent('product.index');
     $trail->push('Edit', route('product.edit',$id));
 });
-//home> add
+//product> add
 Breadcrumbs::for('product.add', function (BreadcrumbTrail $trail) {
     $trail->parent('product.index');
     $trail->push('Edit', route('product.add'));
@@ -32,7 +34,7 @@ Breadcrumbs::for('product.add', function (BreadcrumbTrail $trail) {
 
 
 
-
+//Customer
 Breadcrumbs::for('customer.index', function (BreadcrumbTrail $trail) {
     $trail->push('Customer', route('customer.index'));
 });
@@ -44,16 +46,12 @@ Breadcrumbs::for('customer.edit', function (BreadcrumbTrail $trail,$id) {
     $trail->push('Edit', route('customer.edit',$id));
 });
 
-//customer> add
-Breadcrumbs::for('customer.add', function (BreadcrumbTrail $trail) {
-    $trail->parent('customer.index');
-    $trail->push('Edit', route('customer.add'));
-});
 
 
 
 
 
+//Category
 
 Breadcrumbs::for('category.index', function (BreadcrumbTrail $trail) {
     $trail->push('category', route('category.index'));
@@ -77,7 +75,7 @@ Breadcrumbs::for('category.add', function (BreadcrumbTrail $trail) {
 
 
 
-
+//ORDER
 
 Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail) {
     $trail->push('order', route('order.index'));

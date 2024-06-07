@@ -103,6 +103,7 @@
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
+            $('.dataTables_filter input').attr('placeholder', 'Search Product');
         });
     </script>
 @endpush

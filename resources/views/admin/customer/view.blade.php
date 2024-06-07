@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('breadcrumbs')
-{{ Breadcrumbs::render('customer.edit') }}
+{{ Breadcrumbs::render('customer.edit',$user->id) }}
 @endsection
 @section('section')
     @if ($errors->any())

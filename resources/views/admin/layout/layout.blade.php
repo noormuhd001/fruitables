@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <br>
 
                     
                 @yield('section')
