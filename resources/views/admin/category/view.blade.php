@@ -1,4 +1,10 @@
 @extends('admin.layout.layout')
+
+@section('breadcrumbs')
+<div class="breadcrumbs">
+    {{ Breadcrumbs::render('category.edit', $category->id) }}
+</div>
+@endsection
 @section('section')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -10,7 +16,7 @@
         </div>
     @endif
     <div class="container">
-        <div class="card">
+        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
             <form id="kt_modal_add_product_form" class="form" action="{{ route('category.update') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf

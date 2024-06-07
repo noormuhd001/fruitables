@@ -1,4 +1,8 @@
 @extends('admin.layout.layout')
+
+@section('breadcrumbs')
+{{ Breadcrumbs::render('customer.index') }}
+@endsection
 @section('section')
     @if ($errors->any())
         <div class="alert alert-danger">

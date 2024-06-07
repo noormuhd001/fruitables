@@ -1,5 +1,7 @@
 @extends('admin.layout.layout')
-
+@section('breadcrumbs')
+{{ Breadcrumbs::render('order.index') }}
+@endsection
 @section('section')
 
 <div class="container">

@@ -107,7 +107,7 @@
                             @foreach ($product as $products)
                             <div class="col-md-6 col-lg-6 col-xl-4">
                                 <div class="rounded position-relative fruite-item">
-                                    <a href=""><div class="fruite-img">
+                                    <a href="{{ route('item.view',['id'=>$products->id]) }}"><div class="fruite-img">
                                         <img src="{{ $products->photo }}" class="img-fluid w-100 rounded-top" alt="img">
                                     </div></a>                                    
                                     <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $products->category }}</div>
