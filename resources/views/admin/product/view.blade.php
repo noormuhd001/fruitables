@@ -1,5 +1,8 @@
 @extends('admin.layout.layout')
+@section('breadcrumbs')
 
+{{ Breadcrumbs::render('product.edit', $product->id) }}
+@endsection
 @section('section')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -12,7 +15,7 @@
 @endif
 <div class="container">
 <div class="card">
-  
+    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
     <form  class="form"
     action="{{ route('product.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -127,6 +130,7 @@
     </div>
     <!--end::Actions-->
 </form>
+    </div>
 </div>
 </div>
 

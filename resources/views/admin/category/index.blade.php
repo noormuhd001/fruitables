@@ -1,5 +1,8 @@
 @extends('admin.layout.layout')
 
+@section('breadcrumbs')
+{{ Breadcrumbs::render('category.index') }}
+@endsection
 @section('section')
     @if (session('success'))
         <script>

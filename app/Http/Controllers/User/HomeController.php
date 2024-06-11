@@ -15,4 +15,10 @@ class HomeController extends Controller
         $product = Product::all();
         return view('user.home.index',['product'=>$product,'category'=>$category]);
     }
+
+    public function shop(){
+        $product = Product::all();
+        $categories = categories::all();
+        return view('user.home.shop',['product'=>$product,'categories'=>$categories]);
+    }
 }

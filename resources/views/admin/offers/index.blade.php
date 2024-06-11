@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('product.index') }}
+    {{ Breadcrumbs::render('offer.index') }}
 @endsection
 
 @section('section')
@@ -27,13 +27,14 @@
             <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                 <thead>
                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="min-w-125px">Name</th>
-                        <th class="min-w-125px">Price</th>
+                        <th class="min-w-125px">Product ID</th>
+                        <th class="min-w-125px">Title</th>
                         <th class="min-w-125px">Image</th>
-                        <th class="min-w-125px">Category</th>
-                        <th class="min-w-125px">Basic Description</th>
-                        <th class="min-w-125px">Full Description</th>
-                        <th class="min-w-125px">Stock</th>
+                        <th class="min-w-125px"> Description</th>
+                        <th class="min-w-125px">Discount</th>
+                        <th class="min-w-125px">Percentage</th>
+                        <th class="min-w-125px">Star Date</th>
+                        <th class="min-w-125px">End Date</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
                 </thead>
@@ -88,22 +89,23 @@
                 serverSide: true,
                 paging: false,
                 ajax: {
-                    url: "{{ route('products.list') }}",
+                    url: "{{ route('offer.list') }}",
                 },
                 columns: [
-                    { data: 'name', name: 'name' },
-                    { data: 'price', name: 'price' },
+                    { data: 'productid', name: 'productid' },
+                    { data: 'title', name: 'title' },
                     { data: 'photo', name: 'photo', render: function(data, type, full, meta) {
                         return "<img src='" + data + "' width='100px' height='100px' style='border-radius: 10px' alt='photo'>";
                     }},
-                    { data: 'category', name: 'category' },
-                    { data: 'basicdescription', name: 'basicdescription' },
-                    { data: 'fulldescription', name: 'fulldescription' },
-                    { data: 'stock', name: 'stock' },
+                    { data: 'description', name: 'description' },
+                    { data: 'discount', name: 'discount' },
+                    { data: 'percentage', name: 'percentage' },
+                    { data: 'start_date', name: 'start_date' },
+                    { data: 'end_date', name: 'end_date' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
-            $('.dataTables_filter input').attr('placeholder', 'Search Product');
+            $('.dataTables_filter input').attr('placeholder', 'Search Offer');
         });
     </script>
 @endpush

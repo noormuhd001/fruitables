@@ -8,6 +8,8 @@ use App\Http\Requests\productmanagement\productUpdateRequest;
 use App\Models\categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
+
 class ProductController extends Controller
 {
  
@@ -16,6 +18,26 @@ class ProductController extends Controller
         $product = Product::all();
         $category = categories::all();
         return view('admin.product.index',['product'=>$product,'category'=>$category]);
+    }
+
+    public function add(){
+        $category = categories::all();
+        return view('admin.product.add',['category'=>$category]);
+    }
+
+    public function getProducts(Request $request)
+    {
+        if ($request->ajax()) {
+            $products = Product::select('*');
+            return DataTables::of($products)
+                ->addColumn('action', function ($product) {
+                    return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
     }
 
     public function store(productStoreRequest $request)

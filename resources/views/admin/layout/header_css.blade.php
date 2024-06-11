@@ -21,4 +21,9 @@
     <link href="{{ asset('Admin/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('Admin/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
+    <style>
+        .class{
+          float: right;
+        }
+    </style>
 </head>
