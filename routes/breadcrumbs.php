@@ -105,7 +105,7 @@ Breadcrumbs::for('offer.add', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('offer.edit', function ($trail, $id) {
     $trail->parent('offer.index'); // Assuming 'offer.index' is your index route
-    $offer = \App\Models\categories::findOrFail($id); // Fetch the offer
+    $offer = \App\Models\offer::findOrFail($id); // Fetch the offer
     $trail->push('Edit ' . $offer->name, route('offer.edit', $id));
 });
 

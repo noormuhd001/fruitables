@@ -64,6 +64,20 @@ class Offercontroller extends Controller
     return redirect()->route('offer.index')->with('success', 'offer added successfully!');   
  }
 
+
+ public function edit($id){
+    $offer = offer::findOrFail($id);
+    return view('admin.offers.view',['offer'=>$offer]);
+ }
+
+ public function delete($id){
+ dd('err');
+ }
+
+ public function update(offerstorerequest $request){
+
+   
+ }
  
 
 }
