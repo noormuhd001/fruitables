@@ -22,11 +22,10 @@ class offerstorerequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'photo' => 'required|max:2048', // Adjust max file size as needed
-            'category' => 'required|string',
-            'basic_description' => 'required|string',
-            'full_description' => 'required|string',
+            'description' => 'required|string',
+            'percentage' => 'required|integer',
             'stock' => 'required|integer|min:0',
             'price' => 'required|integer',
         ];
@@ -35,17 +34,20 @@ class offerstorerequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The name field is required.',
-            'name.string' => 'The name must be a string.',
+            'percentage.required' => 'The percentage field is required.',
+            'percentage.integer' => 'The percentage must be a integer.',
+            'price.required' => 'The price field is required.',
+            'price.integer' => 'The price must be a integer.',
             'name.max' => 'The name may not be greater than 255 characters.',
-            'category.string' => 'The category must be a string.',
-            'category.max' => 'The category may not be greater than 20 characters.',
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title may not be greater than 255 characters.',
             'photo.required' => 'The photo field is required.',
             'photo.image' => 'The file must be an image.',
             'photo.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
             'photo.max' => 'The image may not be greater than 2MB.',
-            'basicdescription.string' => 'The basic description must be a string.',
-            'fulldescription.string' => 'The full description must be a string.',
+            'description.string' => 'The basic description must be a string.',
+            'description.required' => 'The  description  field is required.',
             'stock.required' => 'The stock field is required.',
             'stock.integer' => 'The stock must be an integer.',
             'stock.min' => 'The stock must be at least 0.',

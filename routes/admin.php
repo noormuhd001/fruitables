@@ -60,3 +60,5 @@ Route::get('/offer/get',[Offercontroller::class,'getData'])->name('offer.list');
 Route::get('/offer/add',[Offercontroller::class,'add'])->name('offer.add');
 Route::post('/offer/create',[Offercontroller::class,'create'])->name('offer.create');
 Route::post('/offer/store', [Offercontroller::class, 'store'])->name('offer.store');
+Route::get('/offer/{id}/edit',[offerController::class,'edit'])->name('offer.edit');
+Route::post('/offer/updates',[offerController::class,'update'])->name('offer.update');
