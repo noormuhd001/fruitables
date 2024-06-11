@@ -100,7 +100,7 @@ Breadcrumbs::for('offer.index', function (BreadcrumbTrail $trail) {
 //OFFER> add
 Breadcrumbs::for('offer.add', function (BreadcrumbTrail $trail) {
     $trail->parent('offer.index');
-    $trail->push('Edit', route('offer.add'));
+    $trail->push('Add', route('offer.add'));
 });
 
 Breadcrumbs::for('offer.edit', function ($trail, $id) {
