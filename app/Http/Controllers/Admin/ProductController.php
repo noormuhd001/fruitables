@@ -16,8 +16,8 @@ class ProductController extends Controller
 
     public function index(){
         $product = Product::all();
-        $category = categories::all();
-        return view('admin.product.index',['product'=>$product,'category'=>$category]);
+        $categories = categories::all();
+        return view('admin.product.index',['product'=>$product,'categories'=>$categories]);
     }
 
     public function add(){
@@ -26,19 +26,29 @@ class ProductController extends Controller
     }
 
     public function getProducts(Request $request)
-    {
-        if ($request->ajax()) {
-            $products = Product::select('*');
-            return DataTables::of($products)
-                ->addColumn('action', function ($product) {
-                    return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+{
+    if ($request->ajax()) {
+        $products = Product::select('*');
+
+        // Filter by category
+        if ($request->has('category') && !empty($request->category)) {
+            $products->where('category', $request->category);
         }
 
+    
+
+        // Apply DataTables
+        return DataTables::of($products)
+            ->addColumn('action', function ($product) {
+                return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                        <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
+}
+
+    
 
     public function store(productStoreRequest $request)
 {
