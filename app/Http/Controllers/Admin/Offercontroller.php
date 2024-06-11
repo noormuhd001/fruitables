@@ -19,11 +19,11 @@ class Offercontroller extends Controller
     public function getData(Request $request){
 
         if ($request->ajax()) {
-            $products = offer::select('*');
-            return DataTables::of($products)
-                ->addColumn('action', function ($product) {
-                    return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+            $offer = offer::select('*');
+            return DataTables::of($offer)
+                ->addColumn('action', function ($offer) {
+                    return '<a href="' . route('offer.edit', $offer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                            <a href="' . route('offer.delete', $offer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -41,12 +41,15 @@ class Offercontroller extends Controller
 {
     // Save product to database
     $offer = new offer();
-    $offer->name = $request->name;
-    $offer->category = $request->category;
-    $offer->basicdescription = $request->basic_description;
-    $offer->fulldescription = $request->full_description;
+    $offer->title = $request->title;
+    $offer->discount = $request->discount;
+    $offer->description = $request->description;
+    $offer->percentage = $request->percentage;
     $offer->stock = $request->stock;
+    $offer->photo = $request->photo;
     $offer->price = $request->price;
+    $offer->start_date = $request->start_date;
+    $offer->end_date = $request->end_date;
     
     // Handle file upload if you have a photo field
     if ($request->hasFile('photo')) {
@@ -57,7 +60,10 @@ class Offercontroller extends Controller
     }
 
     $offer->save();
-    return redirect()->back()->with('success', 'offer added successfully!');   
+
+    return redirect()->route('offer.index')->with('success', 'offer added successfully!');   
  }
+
+ 
 
 }

@@ -92,7 +92,7 @@
                     url: "{{ route('offer.list') }}",
                 },
                 columns: [
-                    { data: 'productid', name: 'productid' },
+                    { data: 'id', name: 'id' },
                     { data: 'title', name: 'title' },
                     { data: 'photo', name: 'photo', render: function(data, type, full, meta) {
                         return "<img src='" + data + "' width='100px' height='100px' style='border-radius: 10px' alt='photo'>";
