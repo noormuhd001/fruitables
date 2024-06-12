@@ -34,7 +34,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <input type="text" id="product-search" class="form-control form-control-solid w-250px ps-14"
+                <input type="text" id="product-search" name="product-search" class="form-control form-control-solid w-250px ps-14"
                     placeholder="Search Product" />
 
                 <div class="ms-auto">
@@ -80,7 +80,7 @@
                                         <button type="reset"
                                             class="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
                                             data-kt-menu-dismiss="true"
-                                            data-kt-user-table-filter="reset">Reset</button>
+                                            data-kt-user-table-filter="reset" id="reset-filter">Reset</button>
                                         <button type="submit" class="btn btn-primary fw-bold px-6"
                                             data-kt-menu-dismiss="true"
                                             data-kt-user-table-filter="filter"
@@ -143,6 +143,7 @@
                     type: 'GET',
                     data: function(d) {
                         d.category = $('#category-filter').val();
+                        d.searchValue = $('#product-search').val();
                         // Add other filters here if needed
                     }
                 },
@@ -172,6 +173,11 @@
             // Custom search input
             $('#product-search').on('keyup', function() {
                 table.search($(this).val()).draw();
+            });
+            
+            $('#reset-filter').on('click', function() {
+                $('#category-filter').val('').trigger('change'); 
+                table.ajax.reload();
             });
         });
     </script>
