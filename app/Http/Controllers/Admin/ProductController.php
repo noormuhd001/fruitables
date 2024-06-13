@@ -40,17 +40,7 @@ class ProductController extends Controller
     
             // Apply DataTables search and filter
             return DataTables::of($products)
-                // ->filter(function ($query) use ($request) {
-                //     if ($request->has('searchValue') && !empty($request->searchValue)) {
-                //         $searchValue = $request->input('searchValue');
-                //         $query->where(function ($query) use ($searchValue) {
-                //             $query->whereRaw("LOWER(category) LIKE '%' || LOWER(?) || '%'", [$searchValue])
-                //                 ->orWhereRaw("LOWER(name) LIKE '%' || LOWER(?) || '%'", [$searchValue])
-                //                 ->orWhereRaw("LOWER(price) LIKE '%' || LOWER(?) || '%'", [$searchValue])
-                //                 ->orWhereRaw("LOWER(stock) LIKE '%' || LOWER(?) || '%'", [$searchValue]);
-                //         });
-                //     }
-                // })
+         
                 ->addColumn('action', function ($product) {
                     return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
                             <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
