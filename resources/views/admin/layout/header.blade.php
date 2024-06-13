@@ -1152,11 +1152,11 @@
                 </div>
             </div>
             <!--end::Menu-->
-            <!--begin::Actions-->
+            {{-- <!--begin::Actions-->
             <div class="flex-shrink-0 p-4 p-lg-0 me-lg-2">
                 <a href="../../demo11/dist/documentation/getting-started.html" class="btn btn-sm btn-light-primary fw-bolder w-100 w-lg-auto" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="200+ in-house components and 3rd-party plugins">Docs &amp; Components</a>
             </div>
-            <!--end::Actions-->
+            <!--end::Actions--> --}}
         </div>
         <!--end::Menu wrapper-->
     </div>
