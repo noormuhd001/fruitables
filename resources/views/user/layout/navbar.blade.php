@@ -40,10 +40,17 @@
                     <a href="#" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                    </a>                  
                     </a>
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="fas fa-user fa-2x"></i></a>
+                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                            <a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a>
+                            <a href="chackout.html" class="dropdown-item">Orders</a>
+                            <a href="testimonial.html" class="dropdown-item">Profile</a>
+                            <a href="404.html" class="dropdown-item">404 Page</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -22,7 +22,13 @@ include('admin.php');
 Route::middleware(['auth'])->group(function () {
     Route::get('/home',[HomeController::class,'index'])->name('user.home');
     Route::get('/shop',[HomeController::class,'shop'])->name('user.shop');
+    Route::get('/logout',[HomeController::class,'logout'])->name('user.logout');
+
+
+
+
     Route::get('/shop/product/{id}',[ShopController::class,'view'])->name('item.view'); 
+
 });
 
 
