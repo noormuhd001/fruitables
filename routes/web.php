@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\ShopController;
@@ -30,11 +31,9 @@ include('admin.php');
 
 
     Route::get('/shop/product/{id}',[ShopController::class,'view'])->name('item.view'); 
+    
 
 });
-
-
-
 
 
 //review
@@ -42,6 +41,9 @@ include('admin.php');
 Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
 Route::get('/contact',[ReviewController::class,'contact'])->name('user.contact');
 
+//cart
+
+Route::get('/cart',[CartController::class,'index'])->name('user.cart');
 
 //Login pages
 
