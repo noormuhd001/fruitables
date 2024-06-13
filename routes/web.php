@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\customerController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ReviewController;
@@ -23,10 +19,12 @@ use Illuminate\Support\Facades\Route;
 include('admin.php');
 
 //user
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home',[HomeController::class,'index'])->name('user.home');
+    Route::get('/shop',[HomeController::class,'shop'])->name('user.shop');
+    Route::get('/shop/product/{id}',[ShopController::class,'view'])->name('item.view'); 
+});
 
-Route::get('/home',[HomeController::class,'index'])->name('user.home');
-Route::get('/shop',[HomeController::class,'shop'])->name('user.shop');
-Route::get('/shop/product/{id}',[ShopController::class,'view'])->name('item.view');
 
 
 
