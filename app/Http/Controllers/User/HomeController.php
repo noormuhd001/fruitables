@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,5 +21,10 @@ class HomeController extends Controller
         $product = Product::all();
         $categories = categories::all();
         return view('user.home.shop',['product'=>$product,'categories'=>$categories]);
+    }
+
+    public function logout(){
+        Auth::logout();
+        return view('auth.login');
     }
 }

@@ -23,10 +23,11 @@ class userstoreRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|string',
-            'phone'=>'required|string|',
+              'name'=>'required|string',
+              'phone'=>'required|string|',
             'password'=>'required|string',
-            'email' =>'required|string|email',
+            'email' => 'required|string|email|unique:users,email',
+           
         ];
     }
     public function messages()
@@ -36,7 +37,10 @@ class userstoreRequest extends FormRequest
             'name.string' => 'The name must be a string.',            
             'email.string' => 'The category must be a string.',
             'email.required' => 'The email field is required.',
-            'phone.required' => 'The phone field is required.',               
+            'phone.required' => 'The phone field is required.',  
+            'password.required'=>'The password field is required',
+            'email.unique' =>'This is email is already used',
+                         
            
         ];
     }
