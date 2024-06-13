@@ -40,7 +40,7 @@ include('admin.php');
 //review
 
 Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
-
+Route::get('/contact',[ReviewController::class,'contact'])->name('user.contact');
 
 
 //Login pages
