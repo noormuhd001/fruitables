@@ -44,3 +44,4 @@ Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.
 Route::get('/loginpage',[AuthController::class,'loginpage'])->name('loginpage');
 Route::get('/signuppage',[AuthController::class,'signuppage'])->name('signuppage');
 Route::post('/signup',[AuthController::class,'signup'])->name('signup');
+Route::post('/login',[AuthController::class,'login'])->name('login');
