@@ -859,7 +859,7 @@
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+                        {{-- <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title position-relative">Language
                                 <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
@@ -909,7 +909,7 @@
                                 <!--end::Menu item-->
                             </div>
                             <!--end::Menu sub-->
-                        </div>
+                        </div> --}}
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5 my-1">
@@ -918,7 +918,7 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ asset('../../demo11/dist/authentication/flows/basic/sign-in.html') }}" class="menu-link px-5">Sign Out</a>
+                            <a href="{{ route('admin.logout') }}" class="menu-link px-5">Sign Out</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->

@@ -59,6 +59,11 @@ public function login(Request $request){
         return response()->json(['message' => 'Server error.'], 500);
     }
 }
+
+public function adminLogout(){
+    Auth::logout();
+    return view('auth.login');
+}
 }
 
 
