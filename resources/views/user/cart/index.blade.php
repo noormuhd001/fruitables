@@ -67,7 +67,7 @@
                         </td>
                     
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th scope="row">
                             <div class="d-flex align-items-center">
                                 <img src="img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
@@ -138,7 +138,7 @@
                                 <i class="fa fa-times text-danger"></i>
                             </button>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>
