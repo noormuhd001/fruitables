@@ -43,9 +43,13 @@ Route::get('/contact',[ReviewController::class,'contact'])->name('user.contact')
 
 //cart
 
-Route::get('/cart',[CartController::class,'index'])->name('user.cart');
 
-//Login pages
+Route::get('/cart',[CartController::class,'index'])->name('user.cart');
+Route::post('/addtocart',[CartController::class,'addTocart'])->name('user.addtocart');
+Route::post('/cart/remove/{id}',[CartController::class,'delete'])->name('cart.remove');
+Route::post('/cart/update/{id}', [CartController::class, 'updatequantity'])->name('cart.updateQuantity');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 
 
