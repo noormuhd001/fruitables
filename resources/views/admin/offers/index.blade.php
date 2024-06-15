@@ -105,7 +105,7 @@
                     },
                     { data: 'description', name: 'description' },
                     { data: 'price', name: 'price' },
-                    { data: 'offer_percentage', name: 'percentage' },
+                    { data: 'offer_percentage', name: 'offer_percentage' },
                     { data: 'discount', name: 'discount' },
                     { data: 'start_date', name: 'start_date' },
                     { data: 'end_date', name: 'end_date' },

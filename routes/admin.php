@@ -5,9 +5,6 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Offercontroller;
-use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\ReviewController;
-use App\Http\Controllers\User\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +41,9 @@ Route::get('/customer/delete/{id}', [customerController::class, 'delete'])->name
 
 //ordercontroller
 Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+Route::get('/orders/getdata',[OrderController::class,'getData'])->name('order.getdata');
+Route::get('/order/edit/{id}',[OrderController::class,'edit'])->name('order.edit');
+Route::get('/order/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
 
 
 //categorycontroller
