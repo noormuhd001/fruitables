@@ -27,4 +27,8 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', 'Your review was posted successfully');
     }
+
+    public function contact(){
+        return view('user.contact.index');
+    }
 }

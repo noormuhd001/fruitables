@@ -67,27 +67,31 @@
                           
                             <div class="col-lg-12">
                                 <h4 class="mb-3">Featured products</h4>
-                                @for ($i = 1; $i <= 3; $i++)
+                                @foreach ($offerproducts as $offerproduct )
+                                    
+                            
+                                
                                     <div class="d-flex align-items-center justify-content-start mb-3">
                                         <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="{{ asset('img/featur-' . $i . '.jpg') }}" class="img-fluid rounded" alt="">
+                                            <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded" alt="">
                                         </div>
                                         <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
+                                            <h6 class="mb-2">{{ $offerproduct->title }}</h6>
+                                            {{-- <div class="d-flex mb-2">
                                                 <i class="fa fa-star text-secondary"></i>
                                                 <i class="fa fa-star text-secondary"></i>
                                                 <i class="fa fa-star text-secondary"></i>
                                                 <i class="fa fa-star text-secondary"></i>
                                                 <i class="fa fa-star"></i>
-                                            </div>
+                                            </div> --}}
                                             <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                                <h5 class="fw-bold me-2">${{ $offerproduct->discount }}</h5>
+                                                <h5 class="text-danger text-decoration-line-through">${{ $offerproduct->price }}</h5>
                                             </div>
                                         </div>
                                     </div>
-                                @endfor
+                               
+                                @endforeach
                                 <div class="d-flex justify-content-center my-4">
                                     <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">View More</a>
                                 </div>
@@ -105,20 +109,30 @@
                     <div class="col-lg-9">
                         <div class="row g-4 justify-content-center">
                             @foreach ($product as $products)
+                            
                             <div class="col-md-6 col-lg-6 col-xl-4">
                                 <div class="rounded position-relative fruite-item">
-                                    <a href="{{ route('item.view',['id'=>$products->id]) }}"><div class="fruite-img">
-                                        <img src="{{ $products->photo }}" class="img-fluid w-100 rounded-top" alt="img">
-                                    </div></a>                                    
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $products->category }}</div>
-                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                        <h4>{{ $products->name }}</h4>
-                                        <p>{{ $products->basicdescription }}</p>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-0">{{ $products->price }}/kg</p>
-                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    <form action="{{ route('user.addtocart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $products->id }}" id="id">
+                                        <a href="{{ route('item.view', ['id' => $products->id]) }}">
+                                            <div class="fruite-img">
+                                                <img src="{{ $products->photo }}" class="img-fluid w-100 rounded-top" alt="img">
+                                            </div>
+                                        </a>
+                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                            {{ $products->category }}
                                         </div>
-                                    </div>
+                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                            <h4>{{ $products->name }}</h4>
+                                            <p>{{ $products->basicdescription }}</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                <p class="text-dark fs-5 fw-bold mb-0">{{ $products->price }}/kg</p>
+                                                <input type="submit" class="btn border border-secondary rounded-pill px-3 text-primary" value="Add to cart">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
                                 </div>
                             </div>
                             @endforeach
