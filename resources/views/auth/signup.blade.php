@@ -30,7 +30,7 @@
             style="background-image: url({{ asset('Admin/assets/media/illustrations/sketchy-1/14.png') }})">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a href="../../demo11/dist/index.html" class="mb-12">
-                    <img alt="Logo" src="{{ asset('Admin/assets/media/logos/logo-1.svg') }}" class="h-40px" />
+                    <h1 class="text-primary display-6 h-40px">Fruitables</h1>
                 </a>
                 <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                     <form class="form w-100" novalidate="novalidate" id="signup">
