@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\categorymanagent\categoryupdateRequest;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
@@ -66,6 +67,22 @@ public function delete($id){
     $category = categories::findorfail($id);
     $category->delete();
     return redirect()->back()->with('success','product deleted successfully');
+}
+
+
+public function getData(Request $request)
+{
+
+    if ($request->ajax()) {
+       $category = categories::select('*');
+        return DataTables::of($category)
+            ->addColumn('action', function ($category) {
+                return '<a href="' . route('category.edit',$category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                        <a href="' . route('category.delete',$category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
 }
 
 }

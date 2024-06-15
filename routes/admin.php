@@ -52,6 +52,7 @@ Route::post('/category/add', [CategoryController::class, 'store'])->name('catego
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
 Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
 Route::get('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
+Route::get('/category/getdata',[CategoryController::class,'getData'])->name('category.getdata');
 
 //Offercontroller
 
