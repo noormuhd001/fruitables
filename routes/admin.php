@@ -5,9 +5,6 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Offercontroller;
-use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\ReviewController;
-use App\Http\Controllers\User\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,9 +38,13 @@ Route::post('/customer/add', [customerController::class, 'store'])->name('custom
 Route::get('/customer/edit/{id}', [customerController::class, 'edit'])->name('customer.edit');
 Route::post('/customer/update', [CustomerController::class, 'update'])->name('customer.update');
 Route::get('/customer/delete/{id}', [customerController::class, 'delete'])->name('customer.delete');
+Route::get('/customers/getdata',[customerController::class,'getData'])->name('customer.getdata');
 
 //ordercontroller
 Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+Route::get('/orders/getdata',[OrderController::class,'getData'])->name('order.getdata');
+Route::get('/order/edit/{id}',[OrderController::class,'edit'])->name('order.edit');
+Route::get('/order/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
 
 
 //categorycontroller
@@ -52,6 +53,7 @@ Route::post('/category/add', [CategoryController::class, 'store'])->name('catego
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
 Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
 Route::get('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
+Route::get('/category/getdata',[CategoryController::class,'getData'])->name('category.getdata');
 
 //Offercontroller
 
