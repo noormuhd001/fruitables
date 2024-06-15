@@ -42,7 +42,7 @@
                             </svg>
                         </span>
                         <input type="text" data-kt-user-table-filter="search"
-                            class="form-control form-control-solid w-250px ps-14" placeholder="Search user" />
+                            class="form-control form-control-solid w-250px ps-14" placeholder="Search user" id="product-search" name="product-search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -160,58 +160,82 @@
                             <th class="text-end min-w-100px">Actions</th>
                         </tr>
                     </thead>
+                
                     <tbody class="text-gray-600 fw-bold">
-                        @foreach ($users as $user)
-                            <tr>
-                                <td class="d-flex align-items-center">
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="#"
-                                            class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
-                                        <span>{{ $user->email }}</span>
-                                    </div>
-                                </td>
-                                <td>{{ $user->phone }}</td>
-                                <td>{{ $user->accountstatus == 0 ? 'Active' : 'Disable' }}</td>
-                                <td>
-                                    <div class="badge badge-light fw-bolder">{{ $user->updated_at }}</div>
-                                </td>
-                                <td>{{ $user->created_at }}</td>
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                        <span class="svg-icon svg-icon-5 m-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                    fill="black" />
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                        data-kt-menu="true">
-
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('customer.edit', ['id' => $user->id]) }}"
-                                                class="menu-link px-3">Edit</a>
-                                        </div>
-
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('customer.delete', ['id' => $user->id]) }}"
-                                                class="menu-link px-3">Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    @endsection
-    @push('script')
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
-    @endpush
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+@endsection
+
+@push('script')
+<script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#kt_table_users').DataTable({
+                processing: false,
+                serverSide: true,
+                paging: false,
+                dom: 'lrtip',
+                ajax: {
+                    url: "{{ route('customer.getdata') }}",
+                    type: 'GET',
+                    data: function(d) {
+                    
+                        d.searchValue = $('#product-search').val();
+                        // Add other filters here if needed
+                    }
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                  
+                    // { 
+                    //     data: 'photo', 
+                    //     name: 'photo',
+                    //     render: function(data, type, full, meta) {
+                    //         return "<img src='" + data + "' width='100px' height='100px' style='border-radius: 10px' alt='photo'>";
+                    //     }
+                    // },
+                  
+                    { data: 'phone', name: 'phone' },
+                    { data: 'accountstatus', name: 'accountstatus' ,
+                    render: function(data, type, full, meta) {
+            if (data == 0) {
+                return '<span class="badge bg-success">Active</span>';
+            } else if (data == 1) {
+                return '<span class="badge bg-danger">Inactive</span>';
+            } else {
+                return '<span class="badge bg-secondary">Unknown</span>';
+            }
+        }
+    },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'email_verified_at', name: 'email_verified_at' },                  
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                ]
+            });      
+
+            // Custom search input
+            $('#product-search').on('keyup', function() {
+                table.search($(this).val()).draw();
+            });
+   
+        });
+    </script>
+@endpush
+
+

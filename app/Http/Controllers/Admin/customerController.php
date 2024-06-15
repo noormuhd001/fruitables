@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\userManagement\userstoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class customerController extends Controller
 {
@@ -47,6 +48,21 @@ class customerController extends Controller
         $user = User::findOrFail($id);
         $user->delete();        
         return redirect()->route('customer.index')->with('success','product deleted successfully');
+    }
+
+    public function getData(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $customer = User::where('role',0);
+            return DataTables::of($customer)
+                ->addColumn('action', function ($customer) {
+                    return '<a href="' . route('customer.edit', $customer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                            <a href="' . route('customer.delete', $customer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
     
 }
