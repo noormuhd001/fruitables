@@ -150,6 +150,10 @@
                 quantity -= 1;
             }
 
+            if (quantity < 1) {
+            quantity = 1;
+        }
+
             input.val(quantity);
 
             $.ajax({
