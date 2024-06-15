@@ -11,20 +11,21 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
-    public function index(){        
+    public function index()
+    {
         $cart = cart::all();
-        return view('user.cart.index',['cart'=>$cart]);
-
+        return view('user.cart.index', ['cart' => $cart]);
     }
 
-    public function addTocart(Request $request) {
+    public function addTocart(Request $request)
+    {
         $id = $request->id;
         $product = Product::findOrFail($id); // Assuming your product model is named Product
-    
+
         $existingCart = Cart::where('user_id', Auth::id())
-                            ->where('product_id', $product->id)
-                            ->first();
-    
+            ->where('product_id', $product->id)
+            ->first();
+
         if ($existingCart) {
             $existingCart->quantity += 1;
             $existingCart->save();
@@ -38,29 +39,36 @@ class CartController extends Controller
             $cart->quantity = 1;
             $cart->save();
         }
-    
+
         return redirect()->route('user.shop')->with('success', 'Product added to cart successfully.');
     }
-    
-    
- 
-        public function updatequantity(Request $request ,$id)
-{
-    $cart = Cart::findOrFail($id);
-    if ($cart) {
-        $cart->quantity = $request->quantity;
-        $cart->save();
-        return response()->json(['success' => true, 'total' => $cart->price * $cart->quantity]);
-    }
-    return response()->json(['success' => false,'message'=>'Item Removed From Your Cart Successively']);
-}
 
-public function remove($id){
 
-    $cartItem = Cart::findOrFail($id);
-    $cartItem->delete();
 
-    return response()->json(['success' => true]);
-}
+    public function updatequantity(Request $request, $id)
+    {
+        $cart = Cart::findOrFail($id);
+        if ($cart) {
+            $cart->quantity = $request->quantity;
+            $cart->save();
+            return response()->json(['success' => true, 'total' => $cart->price * $cart->quantity]);
+        }
+        return response()->json(['success' => false, 'message' => 'Item Removed From Your Cart Successively']);
     }
 
+    public function remove($id)
+    {
+
+        $cartItem = Cart::findOrFail($id);
+        $cartItem->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+
+    public function getCartCount()
+    {
+        $count = Cart::where('user_id', auth()->id())->count(); // Adjust query as per your cart structure
+        return response()->json(['count' => $count]);
+    }
+}

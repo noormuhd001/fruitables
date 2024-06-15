@@ -59,9 +59,9 @@
             <div class="col-lg-3 col-md-6">
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Contact</h4>
-                    <p>Address: 1429 Netus Rd, NY 48247</p>
-                    <p>Email: Example@gmail.com</p>
-                    <p>Phone: +0123 4567 8910</p>
+                    <p>Address: Bytekat Digital ,Kochi</p>
+                    <p>Email: Noor.bytekat@gmail.com</p>
+                    <p>Phone: +91 8137850467</p>
                     <p>Payment Accepted</p>
                     <img src="" class="img-fluid" alt="">
                 </div>
