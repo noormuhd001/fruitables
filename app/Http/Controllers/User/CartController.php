@@ -72,4 +72,10 @@ class CartController extends Controller
         $count = Cart::where('user_id', auth()->id())->count(); // Adjust query as per your cart structure
         return response()->json(['count' => $count]);
     }
+
+    public function checkout(){
+        $id = auth()->id();
+      $cart = cart::where('user_id',$id)->get();
+        return view('user.cart.checkout',['cart'=>$cart]);
+    }
 }
