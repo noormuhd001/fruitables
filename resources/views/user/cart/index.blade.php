@@ -4,7 +4,9 @@
 
 @endpush
 @section('content')
-
+@php
+    $subtotal = 0;
+@endphp
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
@@ -88,21 +90,28 @@
                         <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0" id="subtotal">${{ $cart->sum(function($carts) { return $carts->price * $carts->quantity; }) }}</p>
+                            <p class="mb-0" id="subtotal">${{$subtotal += $cart->sum(function($carts) { return $carts->price * $carts->quantity; }) }}</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Shipping</h5>
                             <div class="">
-                                <p class="mb-0">Flat rate: $3.00</p>
+                                <p class="mb-0">Flat rate: @if ($subtotal > 1000)
+                                    Free
+                                    @else
+                                    $50
+                                @endif</p>
                             </div>
                         </div>
-                        <p class="mb-0 text-end">Shipping to Ukraine.</p>
+                        {{-- <p class="mb-0 text-end">Shipping to Ukraine.</p> --}}
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4" id="total">${{ $cart->sum(function($carts) { return $carts->price * $carts->quantity; }) + 3.00 }}</p>
+                        <p class="mb-0 pe-4" id="total">${{ $subtotal > 1000 ? $subtotal : $subtotal + 50 }}</p>
                     </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                    <a href="{{ route('checkout') }}">
+                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                    </a>
+
                 </div>
             </div>
         </div>
@@ -171,7 +180,8 @@
                             subtotal += parseFloat($(this).text().replace('$', ''));
                         });
                         $('#subtotal').text('$' + subtotal);
-                        $('#total').text('$' + (subtotal + 3));
+                        var deliveryFee = subtotal > 1000 ? 0 : 50;
+                        $('#total').text('$' + (subtotal + deliveryFee));
                     }
                 }
             });
@@ -198,7 +208,8 @@
                                 subtotal += parseFloat($(this).text().replace('$', ''));
                             });
                             $('#subtotal').text('$' + subtotal);
-                            $('#total').text('$' + (subtotal + 3));
+                            var deliveryFee = subtotal > 1000 ? 0 : 50;
+                            $('#total').text('$' + (subtotal + deliveryFee));
 
                           
                             
