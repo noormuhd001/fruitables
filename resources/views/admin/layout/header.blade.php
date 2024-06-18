@@ -733,25 +733,8 @@
                     <!--end::Menu-->
                 </div>
                 <!--end::Search-->
-                <!--begin::Activities-->
-                <div class="d-flex align-items-center ms-3 ms-lg-4">
-                    <!--begin::Drawer toggle-->
-                    <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary btn-active-bg-light w-30px h-30px w-lg-40px h-lg-40px" id="kt_activities_toggle">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
-                        <span class="svg-icon svg-icon-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect x="8" y="9" width="3" height="10" rx="1.5" fill="black" />
-                                <rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black" />
-                                <rect x="18" y="11" width="3" height="8" rx="1.5" fill="black" />
-                                <rect x="3" y="13" width="3" height="6" rx="1.5" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </div>
-                    <!--end::Drawer toggle-->
-                </div>
-                <!--end::Activities-->
-                <!--begin::User-->
+         
+                <!--begin::User--> 
                 <div class="d-flex align-items-center ms-3 ms-lg-4" id="kt_header_user_menu_toggle">
                     <!--begin::Menu- wrapper-->
                     <!--begin::User icon(remove this button to use user avatar as menu toggle)-->
@@ -778,9 +761,9 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                    <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->name }}
                                     <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -795,123 +778,19 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        {{-- <div class="menu-item px-5">
                             <a href="{{ asset('../../demo11/dist/pages/projects/list.html') }}" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
                                     <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
                                 </span>
                             </a>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title">My Subscription</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/referrals.html') }}" class="menu-link px-5">Referrals</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/billing.html') }}" class="menu-link px-5">Billing</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/statements.html') }}" class="menu-link px-5">Payments</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/statements.html') }}" class="menu-link d-flex flex-stack px-5">Statements
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="View your statements"></i></a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content px-3">
-                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                            <span class="form-check-label text-muted fs-7">Notifications</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="{{ asset('../../demo11/dist/account/statements.html') }}" class="menu-link px-5">My Statements</a>
-                        </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Menu item-->
-                        {{-- <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title position-relative">Language
-                                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('Admin/assets/media/flags/united-states.svg')}}" alt="" /></span></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link d-flex px-5 active">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{asset('Admin/assets/media/flags/united-states.svg')}}" alt="" />
-                                    </span>English</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{ asset('Admin/assets/media/flags/spain.svg') }}" alt="" />
-                                    </span>Spanish</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{ asset('Admin/assets/media/flags/germany.svg') }}" alt="" />
-                                    </span>German</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{ asset('Admin/assets/media/flags/japan.svg') }}" alt="" />
-                                    </span>Japanese</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link d-flex px-5">
-                                    <span class="symbol symbol-20px me-4">
-                                        <img class="rounded-1" src="{{ asset('Admin/assets/media/flags/france.svg') }}" alt="" />
-                                    </span>French</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
                         </div> --}}
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
+                   
+                        {{-- <div class="separator my-2"></div> --}}
+                 
                         <div class="menu-item px-5 my-1">
                             <a href="{{ asset('../../demo11/dist/account/settings.html') }}" class="menu-link px-5">Account Settings</a>
                         </div>
@@ -924,34 +803,12 @@
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <div class="menu-content px-5">
-                                <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="../../demo11/dist/index.html" />
-                                    <span class="pulse-ring ms-n1"></span>
-                                    <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                </label>
-                            </div>
-                        </div>
-                        <!--end::Menu item-->
+                    
                     </div>
                     <!--end::Menu-->
                     <!--end::Menu wrapper-->
                 </div>
-                <!--end::User -->
-                <!--begin::Chat-->
-                <div class="d-flex align-items-center ms-3 ms-lg-4">
-                    <!--begin::Drawer wrapper-->
-                    <div class="btn btn-icon btn-primary position-relative w-30px h-30px w-lg-40px h-lg-40px" id="kt_drawer_chat_toggle">3
-                    <!--begin::Bullet-->
-                    <span class="d-none bullet bullet-dot bg-danger h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
-                    <!--end::Bullet--></div>
-                    <!--end::Drawer wrapper-->
-                </div>
-                <!--end::Chat-->
-                <!--begin::Sidebar Toggler-->
-                <!--end::Sidebar Toggler-->
+           
             </div>
             <!--end::Topbar-->
         </div>
