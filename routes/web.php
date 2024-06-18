@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\HomeController;
@@ -66,3 +67,6 @@ Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->name('
 Route::post('/forgot/mail', [AuthController::class, 'email'])->name('forgot.email');
 Route::get('/verification/{email}', [AuthController::class, 'verify'])->name('email.verify');
 Route::post('/confirmpassword/submit', [AuthController::class, 'submit'])->name('confirmpassword');
+
+
+Route::post('/order',[orderController::class,'placeorder'])->name('order.place');
