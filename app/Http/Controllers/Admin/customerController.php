@@ -29,7 +29,7 @@ class customerController extends Controller
         $user->email = $request->email;
         $user->password =  bcrypt($request['password']);
         $user->save();
-        return redirect()->route('customer.index')->with('success','product added successfully');
+        return redirect()->route('customer.index')->with('success','Customer added successfully');
 
     }
     public function update(userstoreRequest $request){
@@ -41,13 +41,13 @@ class customerController extends Controller
         $user->email = $request->email;
         $user->password =  bcrypt($request['password']);
         $user->save();
-        return redirect()->route('customer.index')->with('success','product edited successfully');
+        return redirect()->route('customer.index')->with('success','Customer edited successfully');
     }
 
     public function delete($id){
         $user = User::findOrFail($id);
         $user->delete();        
-        return redirect()->route('customer.index')->with('success','product deleted successfully');
+        return redirect()->route('customer.index')->with('success','Customer deleted successfully');
     }
 
     public function getData(Request $request)

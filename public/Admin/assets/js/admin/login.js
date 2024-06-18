@@ -48,7 +48,10 @@ $(document).ready(function () {
                 processData: false,
                 success: function (result) {
                     if (result.data == true) {
-                        location.href = result.route;
+                        $('#successMessage').removeClass('d-none').text('Registration successful! Redirecting...');
+                        setTimeout(function() {
+                            location.href = result.route;
+                        }, 2000); // Redirect after 2 seconds
                     } else {
                         $('#customAlert').removeClass('d-none');
                         $('#message').text(result.message);
