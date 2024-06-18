@@ -5,25 +5,17 @@ $(document).ready(function () {
         }
     });
 
-    $('#login').validate({
+    $('#forgot').validate({
         rules: {
             email: {
                 required: true,
                 email: true,
-            },
-            password: {
-                required: true,
-                minlength: 8
             },
         },
         messages: {
             email: {
                 required: "Please enter your Email ID",
                 email: "Please enter a valid email address",
-            },
-            password: {
-                required: "Please enter your password.",
-                minlength: "Password must be at least 8 characters long."
             },
         },
         errorClass: "is-invalid text-danger",
@@ -36,7 +28,7 @@ $(document).ready(function () {
             submitBtn.prop('disabled', true);
             submitBtn.addClass('d-none');
 
-            var form_data = new FormData(form);
+            var form_data = new FormData($('#forgot')[0]);
 
             $.ajax({
                 type: "POST",
@@ -46,12 +38,12 @@ $(document).ready(function () {
                 cache: false,
                 contentType: false,
                 processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (result) {
                     if (result.data == true) {
-                        $('#successMessage').removeClass('d-none').text('Registration successful! Redirecting...');
-                        setTimeout(function() {
-                            location.href = result.route;
-                        }, 2000); // Redirect after 2 seconds
+                        location.href = result.route;
                     } else {
                         $('#customAlert').removeClass('d-none');
                         $('#message').text(result.message);

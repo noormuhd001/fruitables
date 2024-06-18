@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\userManagement\confirmpassword;
 use App\Http\Requests\userManagement\userstoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\forgotpassword;
 
 class AuthController extends Controller
 {
@@ -63,6 +65,38 @@ public function login(Request $request){
 public function adminLogout(){
     Auth::logout();
     return view('auth.login');
+}  public function forgotpassword()
+{
+    return view('auth.forgot');
+}
+
+public function email(Request $request)
+{
+    $email = $request->email;
+    $user = User::where('email', $email)->first();
+
+    if ($user) {
+        dispatch(new ForgotPassword($user));
+        return response()->json(['data' => true, 'route' => route('forgotpassword')]);
+    } else {
+        return response()->json(['data' => false, 'message' => 'User not found']);
+    }
+}
+
+public function verify($email){
+    
+    $useremail = $email; 
+    return view('auth.password-reset',['useremail'=>$useremail]);
+}
+
+public function submit(confirmpassword $request){
+
+    $email = $request->useremail;
+
+   $user = User::where('email',$email)->firstOrFail();
+    $user->password = bcrypt($request['password']);
+    $user->save();
+    return response()->json(['data' => true, 'route' => route('loginpage')]);
 }
 }
 
