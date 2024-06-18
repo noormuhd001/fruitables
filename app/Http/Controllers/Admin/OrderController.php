@@ -25,8 +25,7 @@ public function getData(Request $request)
         $order = order::select('*');
         return DataTables::of($order)
             ->addColumn('action', function ($order) {
-                return '<a href="' . route('order.edit', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                        <a href="' . route('order.delete', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                return '<a href="' . route('order.view', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">View</a>';
             })
             ->rawColumns(['action'])
             ->make(true);

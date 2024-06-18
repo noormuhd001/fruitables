@@ -35,12 +35,13 @@
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="min-w-125px">Order ID</th>
-                    <th class="min-w-125px">Customer Name</th>
+                    <th class="min-w-125px">First Name</th>
+                    <th class="min-w-125px">Last Name</th>
                     <th class="min-w-125px">Total Amount</th>
                     <th class="min-w-125px">Payment Method</th>
                     <th class="min-w-125px">Paid At</th>
                     <th class="min-w-125px">Shipping Address</th>
-                    <th class="text-end min-w-100px">Actions</th>
+                    <th class="min-w-100px">Actions</th>
                 </tr>
                 <!--end::Table row-->
             </thead>
@@ -83,13 +84,14 @@ $(document).ready(function() {
             }
         },
         columns: [
-            { data: 'order_id', name: 'order_id' },
-            { data: 'customer_name', name: 'customer_name' },
+            { data: 'id', name: 'id' },
+            { data: 'first_name', name: 'firs_name' },
+            { data: 'last_name', name: 'last_name' },
             { data: 'total_amount', name: 'total_amount' },
             // { data: 'offer_percentage', name: 'percentage' },
             { data: 'payment_method', name: 'payment_method' },
             { data: 'paid_at', name: 'paid_at' },
-            { data: 'shipping_address', name: 'shipping_address' },
+            { data: 'address', name: 'address' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
     });
