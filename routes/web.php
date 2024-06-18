@@ -55,8 +55,15 @@ Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.c
 
 
 
-Route::get('/loginpage',[AuthController::class,'loginpage'])->name('loginpage');
+Route::get('/',[AuthController::class,'loginpage'])->name('loginpage');
 Route::get('/signuppage',[AuthController::class,'signuppage'])->name('signuppage');
 Route::post('/signup',[AuthController::class,'signup'])->name('signup');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::get('/adminlogout',[AuthController::class,'adminLogout'])->name('admin.logout');
+
+
+
+Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->name('forgotpassword');
+Route::post('/forgot/mail', [AuthController::class, 'email'])->name('forgot.email');
+Route::get('/verification/{email}',[AuthController::class,'verify'])->name('email.verify');
+Route::post('/confirmpassword/submit',[AuthController::class,'submit'])->name('confirmpassword');
