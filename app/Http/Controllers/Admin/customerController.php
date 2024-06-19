@@ -1,60 +1,89 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\userManagement\userstoreRequest;
 use App\Models\User;
+use App\Services\Admin\Customermanagement\CustomerManagementService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class customerController extends Controller
 {
     //
-
-    public function index(){
-        $users = User::where('role', 0 )->get();
-        return view('admin.customer.index',['users'=>$users]);
+    private $customerManagementService;
+    public function __construct(CustomerManagementService $categoryManagementService)
+    {
+        $this->customerManagementService = $categoryManagementService;
     }
 
-    public function edit($id){
+
+    public function index()
+    {
+        $users = User::where('role', 0)->get();
+        if ($users) {
+            return view('admin.customer.index', ['users' => $users]);
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function edit($id)
+    {
         $user = user::findOrFail($id);
-        return view('admin.customer.view',['user'=>$user]);        
+        if ($user) {
+            return view('admin.customer.view', ['user' => $user]);
+        } else {
+            return abort(404);
+        }
     }
 
-    public function store(userstoreRequest $request){
-       
-        $user = new User;
-        $user->name = $request->name;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->password =  bcrypt($request['password']);
-        $user->save();
-        return redirect()->route('customer.index')->with('success','Customer added successfully');
-
+    public function store(userstoreRequest $request)
+    {
+        try {
+            $user = $this->customerManagementService->store($request);
+            if ($user) {
+                return redirect()->route('customer.index')->with('success', 'Customer added successfully');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
-    public function update(userstoreRequest $request){
+    public function update(userstoreRequest $request)
+    {
+        try {
+            $update = $this->customerManagementService->update($request);
+            if ($update) {
+                return redirect()->route('customer.index')->with('success', 'Customer edited successfully');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
 
-        $id = $request->id;
+    public function delete($id)
+    {
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->password =  bcrypt($request['password']);
-        $user->save();
-        return redirect()->route('customer.index')->with('success','Customer edited successfully');
-    }
-
-    public function delete($id){
-        $user = User::findOrFail($id);
-        $user->delete();        
-        return redirect()->route('customer.index')->with('success','Customer deleted successfully');
+        $user->delete();
+        if ($user) {
+            return redirect()->route('customer.index')->with('success', 'Customer deleted successfully');
+        } else {
+            return abort(500);
+        }
     }
 
     public function getData(Request $request)
     {
 
         if ($request->ajax()) {
-            $customer = User::where('role',0);
+            $customer = User::where('role', 0);
             return DataTables::of($customer)
                 ->addColumn('action', function ($customer) {
                     return '<a href="' . route('customer.edit', $customer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
@@ -64,5 +93,4 @@ class customerController extends Controller
                 ->make(true);
         }
     }
-    
 }
