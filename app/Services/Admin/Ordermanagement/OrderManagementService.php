@@ -68,4 +68,17 @@ class OrderManagementService
        'orderitems' => $orderitems,
       ];
     }
+
+
+    public function adminorderview($id){
+        $orders = order::findOrFail($id);
+        $orderitems = orderitem::where('order_id',$id)->get();
+  
+        return [
+         'orders' => $orders,
+         'orderitems' => $orderitems,
+        ];
+
+    }
+    
 }

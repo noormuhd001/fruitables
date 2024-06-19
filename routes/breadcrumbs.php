@@ -78,16 +78,20 @@ Breadcrumbs::for('category.add', function (BreadcrumbTrail $trail) {
 //ORDER
 
 Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail) {
-    $trail->push('order', route('order.index'));
+    $trail->push('Order', route('order.index'));
 });
 
 
-// order > edit
+// order > View
+Breadcrumbs::for('order.adminorderview', function ($trail, $id) {
+    // Load the order
+    $order = \App\Models\Order::findOrFail($id);
+    
+    // Parent breadcrumb
+    $trail->parent('order.index');
 
-Breadcrumbs::for('order.edit', function ($trail, $id) {
-    $trail->parent('order.index'); // Assuming 'order.index' is your index route
-    $order = \App\Models\categories::findOrFail($id); // Fetch the order
-    $trail->push('Edit ' . $order->name, route('order.edit', $id));
+    // Push the view order breadcrumb
+    $trail->push('View Order ' , route('order.adminorderview', $id));
 });
 
 //Offer

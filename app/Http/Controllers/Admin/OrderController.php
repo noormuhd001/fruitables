@@ -38,7 +38,7 @@ class OrderController extends Controller
                 $order = order::select('*');
                 return DataTables::of($order)
                     ->addColumn('action', function ($order) {
-                        return '<a href="' . route('order.view', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">View</a>';
+                        return '<a href="' . route('order.adminorderview', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">View</a>';
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -93,5 +93,18 @@ class OrderController extends Controller
             report($e);
             return abort(500);;
         }
+    }
+    public function adminorderview($id){
+        try{
+            $data = $this->ordermanagementservice->adminorderview($id);
+            if($data){
+             return view('admin.order.view',$data);
+            }else{
+                return abort(404);
+            }
+        }catch(\Exception $e){
+            report($e);
+            return abort(500);;
+        } 
     }
 }
