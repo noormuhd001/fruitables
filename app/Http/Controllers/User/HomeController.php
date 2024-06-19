@@ -3,29 +3,51 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\categories;
-use App\Models\offer;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\User\Homemanagement\HomeManagementService;
 
 class HomeController extends Controller
 {
     //
-    public function index(){
-        $category = categories::all();
-        $product = Product::all();
-        return view('user.home.index',['product'=>$product,'category'=>$category]);
+    private $homeManagementService;
+
+    public function __construct(HomeManagementService $homeManagementService)
+    {
+        $this->homeManagementService = $homeManagementService;
     }
 
-    public function shop(){
-        $product = Product::all();
-        $offerproducts = offer::all();
-        $categories = categories::all();
-        return view('user.home.shop',['product'=>$product,'categories'=>$categories,'offerproducts'=>$offerproducts]);
+    public function index()
+    {
+        try {
+            $data = $this->homeManagementService->index();
+            if ($data) {
+                return view('user.home.index', $data);
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 
-    public function logout(){
+    public function shop()
+    {
+        try {
+            $data = $this->homeManagementService->shop();
+            if ($data) {
+                return view('user.home.shop', $data);
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
+    public function logout()
+    {
         Auth::logout();
         return view('auth.login');
     }

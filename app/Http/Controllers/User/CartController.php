@@ -3,79 +3,106 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\cart;
-use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Services\User\Cartmanagement\CartManagementService;
 
 class CartController extends Controller
 {
-    //
+    private $cartManagementService;
+
+    public function __construct(CartManagementService $cartManagementService)
+    {
+        $this->cartManagementService = $cartManagementService;
+    }
+
     public function index()
     {
-        $id = auth()->id();
-        $cart = cart::where('user_id',$id)->get();
-        return view('user.cart.index', ['cart' => $cart]);
+        try {
+
+            $cart = $this->cartManagementService->getCartItems();
+            if ($cart) {
+                return view('user.cart.index', ['cart' => $cart]);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 
-    public function addTocart(Request $request)
+    public function addToCart(Request $request)
     {
-        $id = $request->id;
-        $product = Product::findOrFail($id); // Assuming your product model is named Product
-
-        $existingCart = Cart::where('user_id', Auth::id())
-            ->where('product_id', $product->id)
-            ->first();
-
-        if ($existingCart) {
-            $existingCart->quantity += 1;
-            $existingCart->save();
-        } else {
-            $cart = new Cart();
-            $cart->product_id = $product->id;
-            $cart->user_id = Auth::id();
-            $cart->name = $product->name;
-            $cart->price = $product->price;
-            $cart->photo = $product->photo;
-            $cart->quantity = 1;
-            $cart->save();
+        try {
+            $message = $this->cartManagementService->addToCart($request->id);
+            if ($message) {
+                return redirect()->route('user.shop')->with('success', $message);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
-
-        return redirect()->route('user.shop')->with('success', 'Product added to cart successfully.');
     }
 
-
-
-    public function updatequantity(Request $request, $id)
+    public function updateQuantity(Request $request, $id)
     {
-        $cart = Cart::findOrFail($id);
-        if ($cart) {
-            $cart->quantity = $request->quantity;
-            $cart->save();
-            return response()->json(['success' => true, 'total' => $cart->price * $cart->quantity]);
+        try {
+            $response = $this->cartManagementService->updateCartQuantity($id, $request->quantity);
+            if ($response) {
+                return response()->json($response);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
-        return response()->json(['success' => false, 'message' => 'Item Removed From Your Cart Successively']);
     }
 
     public function remove($id)
     {
-
-        $cartItem = Cart::findOrFail($id);
-        $cartItem->delete();
-
-        return response()->json(['success' => true]);
+        try {
+            $response = $this->cartManagementService->removeCartItem($id);
+            if ($response) {
+                return response()->json($response);
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
-
 
     public function getCartCount()
     {
-        $count = Cart::where('user_id', auth()->id())->count(); // Adjust query as per your cart structure
-        return response()->json(['count' => $count]);
+        try {
+            $count = $this->cartManagementService->getCartCount();
+            if ($count) {
+                return response()->json(['count' => $count]);
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 
-    public function checkout(){
-        $id = auth()->id();
-      $cart = cart::where('user_id',$id)->get();
-        return view('user.cart.checkout',['cart'=>$cart]);
+    public function checkout()
+    {
+        try {
+            $cart = $this->cartManagementService->getCartItems();
+            if ($cart) {
+                return view('user.cart.checkout', ['cart' => $cart]);
+            } else {
+                abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 }
