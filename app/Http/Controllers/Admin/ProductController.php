@@ -7,105 +7,130 @@ use App\Models\Product;
 use App\Http\Requests\productmanagement\productStoreRequest;
 use App\Http\Requests\productmanagement\productUpdateRequest;
 use App\Models\categories;
+use App\Services\Admin\Productmanagement\ProductManagementService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
 
+    private $productmanagementservice;
+    public function __construct(ProductManagementService $productManagementService)
+    {
+        $this->productmanagementservice = $productManagementService;
+    }
 
     public function index()
     {
-        $product = Product::all();
-        $categories = categories::all();
-        return view('admin.product.index', ['product' => $product, 'categories' => $categories]);
-    }
-
-    public function add()
-    {
-        $category = categories::all();
-        return view('admin.product.add', ['category' => $category]);
-    }
-
-    public function getProducts(Request $request)
-    {
-        if ($request->ajax()) {
-            $products = Product::select('*');
-    
-            // Apply filter by category
-            if ($request->has('category') && !empty($request->category)) {
-                $products->where('category', $request->category);
+        try {
+            $index = $this->productmanagementservice->index();
+            if ($index) {
+                return view('admin.product.index', $index);
+            } else {
+                return abort(404);
             }
-    
-            // Apply DataTables search and filter
-            return DataTables::of($products)
-         
-                ->addColumn('action', function ($product) {
-                    return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
     }
-    
+    public function add()
+    {
+        try {
+            $category = categories::all();
+            return view('admin.product.add', ['category' => $category]);
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+    public function getProducts(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $products = Product::select('*');
+
+                // Apply filter by category
+                if ($request->has('category') && !empty($request->category)) {
+                    $products->where('category', $request->category);
+                }
+
+                // Apply DataTables search and filter
+                return DataTables::of($products)
+
+                    ->addColumn('action', function ($product) {
+                        return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
 
 
     public function store(productStoreRequest $request)
     {
         // Save product to database
-        $product = new Product();
-        $product->name = $request->name;
-        $product->category = $request->category;
-        $product->basicdescription = $request->basic_description;
-        $product->fulldescription = $request->full_description;
-        $product->stock = $request->stock;
-        $product->price = $request->price;
-        $product->SKU = Str::uuid(); // Ensure 'Str' is correctly imported
-
-        // Handle file upload if you have a photo field
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads'), $fileName); // Adjust folder path as needed
-            $product->photo = 'uploads/' . $fileName; // Add missing slash
+        try {
+            $product = $this->productmanagementservice->store($request);
+            if ($product) {
+                return redirect()->back()->with('success', 'product added successfully!');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
-
-        $product->save();
-        return redirect()->back()->with('success', 'product added successfully!');
     }
 
 
     public function edit($id)
     {
-
-        $product = Product::findorfail($id);
-        $category = categories::all();
-        return view('admin.product.view', ['product' => $product, 'category' => $category]);
+        try {
+            $data = $this->productmanagementservice->edit($id);
+            if ($data) {
+                return view('admin.product.view', $data);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 
     public function update(productUpdateRequest $request)
     {
-
-        $id = $request->id;
-        $product = Product::findorfail($id);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->category = $request->category;
-        $product->basicdescription = $request->basic_description;
-        $product->fulldescription = $request->full_description;
-        $product->stock = $request->stock;
-        $product->save();
-
-        return redirect()->route('product.index')->with('success', 'product edited successfully');
+        try {
+            $product = $this->productmanagementservice->update($request);
+            if ($product) {
+                return redirect()->route('product.index')->with('success', 'product edited successfully');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
     public function delete($id)
     {
-
-        $product = product::findorfail($id);
-        $product->delete();
-
-        return redirect()->back()->with('success', 'product deleted successfully');
+        try {
+            $delete = $this->productmanagementservice->delete($id);
+            if ($delete) {
+                return redirect()->back()->with('success', 'product deleted successfully');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 }
