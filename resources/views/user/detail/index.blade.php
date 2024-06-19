@@ -351,17 +351,17 @@
         <h1 class="fw-bold mb-0">Related products</h1>
    <div class="vesitable">
     <div class="owl-carousel vegetable-carousel justify-content-center">
-        @foreach ($allproducts as $product)
+        @foreach ($allproducts as $data)
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset($product->photo) }}" class="img-fluid w-100 rounded-top" alt="{{ $product->name }}">
+                    <img src="{{ asset($data->photo) }}" class="img-fluid w-100 rounded-top" alt="{{ $data->name }}">
                 </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">{{ $product->category }}</div>
+                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">{{ $data->category }}</div>
                 <div class="p-4 pb-0 rounded-bottom">
-                    <h4>{{ $product->name }}</h4>
-                    <p>{{ $product->basicdescription }}</p>
+                    <h4>{{ $data->name }}</h4>
+                    <p>{{ $data->basicdescription }}</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold">{{ $product->price }}</p>
+                        <p class="text-dark fs-5 fw-bold">{{ $data->price }}</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                     </div>
                 </div>
@@ -373,7 +373,7 @@
         </div>
     </div>
 </div>
-<!-- Single Product End -->
+<!-- Single data End -->
 
 
 @endsection
