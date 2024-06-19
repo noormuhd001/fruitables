@@ -61,7 +61,7 @@ class OrderManagementService
     }
     public function orderview($id){
       $orders = order::findOrFail($id);
-      $orderitems = orderitem::where('order_id',$id);
+      $orderitems = orderitem::where('order_id',$id)->get();
 
       return [
        'orders' => $orders,
