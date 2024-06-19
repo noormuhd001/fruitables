@@ -7,82 +7,106 @@ use App\Models\categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\categorymanagent\categoryupdateRequest;
-use Illuminate\Support\Facades\Storage;
+use App\Services\Admin\Categorymanagement\CategoryManagementService;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
     //
-    public function index(){
-        $category = categories::all();
-        return view('admin.category.index',['category'=>$category]);
+    private $categoryManagementService;
+    public function __construct(CategoryManagementService $categoryManagementService)
+    {
+        $this->categoryManagementService = $categoryManagementService;
     }
-
-    public function store(categoryStoreRequest $request){
-
-        $category = new categories;
-        $category->name= $request->name;
-
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads'), $fileName); // Adjust folder path as needed
-            $category->photo = 'uploads/' . $fileName; // Add missing slash
+    public function index()
+    {
+        try {
+            $category = $this->categoryManagementService->index();
+            if ($category) {
+                return view('admin.category.index', ['category' => $category]);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
-    $category->save();
+    }
 
-   return redirect()->back()->with('success','Category added successfully!'); 
-   }
-
-   public function edit($id){
-     $category = categories::findorfail($id);
-     return view('admin.category.view',['category'=>$category]);
-
-   }
-
-
-   public function update(categoryupdateRequest $request) {
-    $id = $request->id;
-    $category = Categories::findOrFail($id);
-    $category->name = $request->name;
-
-    if ($request->hasFile('photo')) {
-        $file = $request->file('photo');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('uploads', $fileName, 'public');
-        
-        // Optionally delete the old file
-        if ($category->photo && Storage::disk('public')->exists($category->photo)) {
-            Storage::disk('public')->delete($category->photo);
+    public function store(categoryStoreRequest $request)
+    {
+        try {
+            $store = $this->categoryManagementService->store($request);
+            if ($store) {
+                return redirect()->back()->with('success', 'Category added successfully!');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
         }
-
-        $category->photo = $filePath;
     }
 
-    $category->save();
-    return redirect()->route('category.index')->with('success', 'Category updated successfully!');
-}
-
-public function delete($id){
-    $category = categories::findorfail($id);
-    $category->delete();
-    return redirect()->back()->with('success','product deleted successfully');
-}
-
-
-public function getData(Request $request)
-{
-
-    if ($request->ajax()) {
-       $category = categories::select('*');
-        return DataTables::of($category)
-            ->addColumn('action', function ($category) {
-                return '<a href="' . route('category.edit',$category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                        <a href="' . route('category.delete',$category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+    public function edit($id)
+    {
+        try {
+            $category = $this->categoryManagementService->edit($id);
+            if ($category) {
+                return view('admin.category.view', ['category' => $category]);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
-}
 
+
+    public function update(categoryupdateRequest $request)
+    {
+        try {
+            $update = $this->categoryManagementService->update($request);
+            if ($update) {
+                return redirect()->route('category.index')->with('success', 'Category updated successfully!');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $category = $this->categoryManagementService->delete($id);
+            if ($category) {
+                return redirect()->back()->with('success', 'product deleted successfully');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
+
+    public function getData(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $category = categories::select('*');
+            return DataTables::of($category)
+                ->addColumn('action', function ($category) {
+                    return '<a href="' . route('category.edit', $category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
+                        <a href="' . route('category.delete', $category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
 }
