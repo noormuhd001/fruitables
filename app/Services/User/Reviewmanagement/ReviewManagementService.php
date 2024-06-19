@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Services\User\Reviewmanagement;
+
+use App\Models\categories;
+use App\Models\Product;
+use App\Models\Review;
+
+class ReviewManagementService
+{
+ public function store($data){
+    $review = new Review;
+    $review->name = $data->name;
+    $review->email = $data->email;
+    $review->review = $data->review;
+    $review->rating = $data->rating; // Save the rating
+    $review->save();
+
+    return $review;
+ }
+}

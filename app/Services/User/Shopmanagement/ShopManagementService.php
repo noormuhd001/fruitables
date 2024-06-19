@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ShopManagement;
+namespace App\Services\User\ShopManagement;
 
 use App\Models\categories;
 use App\Models\Product;

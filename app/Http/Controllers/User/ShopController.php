@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\categories;
-use App\Models\Product;
-use App\Models\Review;
-use App\Services\Shopmanagement\ShopManagementService;
+use App\Services\User\Shopmanagement\ShopManagementService;
 
-use Illuminate\Http\Request;
+
 
 class ShopController extends Controller
 {

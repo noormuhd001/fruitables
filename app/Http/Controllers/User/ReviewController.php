@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Review;
+use App\Services\User\ReviewManagement\ReviewManagementService;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    //
+    private $reviewManagementService;
+
+    public function __construct(ReviewManagementService $reviewManagementService)
+    {
+        $this->reviewManagementService = $reviewManagementService;
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -18,17 +24,21 @@ class ReviewController extends Controller
             'rating' => 'required|integer', // Add validation for rating
         ]);
 
-        $review = new Review;
-        $review->name = $request->name;
-        $review->email = $request->email;
-        $review->review = $request->review;
-        $review->rating = $request->rating; // Save the rating
-        $review->save();
-
-        return redirect()->back()->with('success', 'Your review was posted successfully');
+        try {
+            $review = $this->reviewManagementService->store($request);
+            if ($review) {
+                return redirect()->back()->with('success', 'Your review was posted successfully');
+            } else {
+                return redirect()->back()->with('error', 'Your review failed to post');
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 
-    public function contact(){
+    public function contact()
+    {
         return view('user.contact.index');
     }
 }
