@@ -32,10 +32,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/shop/product/{id}', [ShopController::class, 'view'])->name('item.view');
-});
 
 
-//review
+    //review
 
 Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
 Route::get('/contact', [ReviewController::class, 'contact'])->name('user.contact');
@@ -50,6 +49,16 @@ Route::post('/cart/update/{id}', [CartController::class, 'updatequantity'])->nam
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
 Route::get('/cart/checkout',[CartController::class,'checkout'])->name('checkout');
+
+//order
+
+Route::post('/order',[orderController::class,'placeorder'])->name('order.place');
+Route::get('/orderstatus',[OrderController::class,'orderstatus'])->name('order.status');
+Route::get('/orderstatus/{id}',[OrderController::class,'orderview'])->name('order.detail');
+
+
+
+});
 
 
 
@@ -69,4 +78,4 @@ Route::get('/verification/{email}', [AuthController::class, 'verify'])->name('em
 Route::post('/confirmpassword/submit', [AuthController::class, 'submit'])->name('confirmpassword');
 
 
-Route::post('/order',[orderController::class,'placeorder'])->name('order.place');
+

@@ -64,4 +64,34 @@ class OrderController extends Controller
             return abort(500);
         }        // Redirect or return a response as needed
     }
+
+
+    public function orderstatus()
+    {
+        try {
+            $orders = $this->ordermanagementservice->orderstatus();
+            if ($orders) {
+                return view('user.order.index', $orders);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
+    public function orderview($id){
+        try{
+            $data = $this->ordermanagementservice->orderview($id);
+            if($data){
+             return view('user.order.view',$data);
+            }else{
+                return abort(404);
+            }
+        }catch(\Exception $e){
+            report($e);
+            return abort(500);;
+        }
+    }
 }

@@ -50,4 +50,22 @@ class OrderManagementService
 
         return $order;
     }
+
+    public function orderstatus(){
+        $id = auth()->id();
+        $orders = order::where('user_id',$id)->get();
+
+        return [
+     'orders' => $orders,
+        ];
+    }
+    public function orderview($id){
+      $orders = order::findOrFail($id);
+      $orderitems = orderitem::where('order_id',$id)->get();
+
+      return [
+       'orders' => $orders,
+       'orderitems' => $orderitems,
+      ];
+    }
 }
