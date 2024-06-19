@@ -43,7 +43,8 @@ Route::get('/customers/getdata',[customerController::class,'getData'])->name('cu
 //ordercontroller
 Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orders/getdata',[OrderController::class,'getData'])->name('order.getdata');
-Route::get('/order/view/{id}',[OrderController::class,'edit'])->name('order.view');
+Route::get('/orders/view/{id}',[OrderController::class,'edit'])->name('order.view');
+Route::get('/orders/adminorderview/{id}',[OrderController::class,'adminorderview'])->name('order.adminorderview');
 
 
 //categorycontroller
