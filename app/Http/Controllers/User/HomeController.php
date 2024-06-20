@@ -51,4 +51,19 @@ class HomeController extends Controller
         Auth::logout();
         return view('auth.login');
     }
+
+    public function profile()
+    {
+        try {
+            $data = $this->homeManagementService->profile();
+            if ($data) {
+                return view('user.profile.index', $data);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
 }
