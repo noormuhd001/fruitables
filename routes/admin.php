@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\adminprofilecontroller;
 use App\Http\Controllers\Admin\customerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Offercontroller;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/adminpage', function () {
-    return view('welcome');
-})->name('admindashboard');
+Route::get('/adminpage',[AuthController::class,'adminhome'])->name('admindashboard'); 
+
+ 
 
 
 //product controller
@@ -66,3 +68,8 @@ Route::post('/offer/store', [OfferController::class, 'store'])->name('offer.stor
 Route::get('/offer/{id}/edit', [offerController::class, 'edit'])->name('offer.edit');
 Route::post('/offer/updates', [offerController::class, 'update'])->name('offer.update');
 Route::get('/offer/{id}/delete', [offerController::class, 'delete'])->name('offer.delete');
+
+
+//profilecontroller
+
+Route::get('/aprofile',[adminprofilecontroller::class,'index'])->name('adminprofile.index');

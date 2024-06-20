@@ -59,8 +59,8 @@ class ProductController extends Controller
                 return DataTables::of($products)
 
                     ->addColumn('action', function ($product) {
-                        return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                        return '<a href="' . route('product.edit', $product->id) . '" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="' . route('product.delete', $product->id) . '" class="btn btn-danger btn-sm">Delete</a>';
                     })
                     ->rawColumns(['action'])
                     ->make(true);
