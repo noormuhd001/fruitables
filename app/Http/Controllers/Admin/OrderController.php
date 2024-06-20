@@ -107,4 +107,11 @@ class OrderController extends Controller
             return abort(500);;
         } 
     }
+
+    public function changestatus(Request $request,$id){
+        $changestatus = $this->ordermanagementservice->changestatus($request,$id);
+        
+
+        return redirect()->back()->with('success','Order status changed successfully ');
+    }
 }

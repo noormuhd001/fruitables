@@ -80,5 +80,15 @@ class OrderManagementService
         ];
 
     }
+
+    public function changestatus($data,$id){
+
+        $order = order::findOrFail($id);
+        $order->status = $data->status;
+        $order->save();
+
+        return $order;
+
+    }
     
 }
