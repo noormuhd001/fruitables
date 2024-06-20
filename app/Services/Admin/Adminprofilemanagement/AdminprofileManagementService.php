@@ -13,7 +13,9 @@ class AdminprofileManagementService
         $id = auth()->id();
         $user = User::findOrFail($id);
 
-        return $user;
+        return [
+            'user' => $user
+        ];
 
     }
 }
