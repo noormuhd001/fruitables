@@ -8,7 +8,7 @@
         }
     </style>
 @endpush
-
+<div class="container p-3">
  <div class="container-fluid py-5">
         <div class="container py-5">
     <h2>Your Orders</h2>
@@ -68,6 +68,6 @@
 </div>
 </div>
  </div>
- 
+</div>
 
 @endsection
