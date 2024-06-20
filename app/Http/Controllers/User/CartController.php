@@ -34,9 +34,9 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         try {
-            $message = $this->cartManagementService->addToCart($request->id);
+            $message = $this->cartManagementService->addToCart($request->id,$request);
             if ($message) {
-                return redirect()->route('user.shop')->with('success', $message);
+                return redirect()->back()->with('success', $message);
             } else {
                 return abort(404);
             }
