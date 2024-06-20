@@ -85,7 +85,7 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'first_name', name: 'firs_name' },
+            { data: 'first_name', name: 'first_name' },
             { data: 'last_name', name: 'last_name' },
             { data: 'total_amount', name: 'total_amount' },
             // { data: 'offer_percentage', name: 'percentage' },

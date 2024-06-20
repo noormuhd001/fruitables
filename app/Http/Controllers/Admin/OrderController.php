@@ -35,10 +35,10 @@ class OrderController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $order = order::select('*');
+                $order = order::select('*')->latest();
                 return DataTables::of($order)
                     ->addColumn('action', function ($order) {
-                        return '<a href="' . route('order.adminorderview', $order->id) . '" class="btn btn-light btn-active-light-primary btn-sm">View</a>';
+                        return '<a href="' . route('order.adminorderview', $order->id) . '" class="btn btn-primary">View</a>';
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -81,37 +81,48 @@ class OrderController extends Controller
         }
     }
 
-    public function orderview($id){
-        try{
+    public function orderview($id)
+    {
+        try {
             $data = $this->ordermanagementservice->orderview($id);
-            if($data){
-             return view('user.order.view',$data);
-            }else{
+            if ($data) {
+                return view('user.order.view', $data);
+            } else {
                 return abort(404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             report($e);
             return abort(500);;
         }
     }
-    public function adminorderview($id){
-        try{
+    public function adminorderview($id)
+    {
+        try {
             $data = $this->ordermanagementservice->adminorderview($id);
-            if($data){
-             return view('admin.order.view',$data);
-            }else{
+            if ($data) {
+                return view('admin.order.view', $data);
+            } else {
                 return abort(404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             report($e);
             return abort(500);;
-        } 
+        }
     }
 
-    public function changestatus(Request $request,$id){
-        $changestatus = $this->ordermanagementservice->changestatus($request,$id);
-        
+    public function changestatus(Request $request, $id)
+    {
+        try {
+            $changestatus = $this->ordermanagementservice->changestatus($request, $id);
+            if ($changestatus) {
 
-        return redirect()->back()->with('success','Order status changed successfully ');
+                return redirect()->back()->with('success', 'Order status changed successfully ');
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
     }
 }
