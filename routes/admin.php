@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\adminprofilecontroller;
 use App\Http\Controllers\Admin\customerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -66,3 +67,8 @@ Route::post('/offer/store', [OfferController::class, 'store'])->name('offer.stor
 Route::get('/offer/{id}/edit', [offerController::class, 'edit'])->name('offer.edit');
 Route::post('/offer/updates', [offerController::class, 'update'])->name('offer.update');
 Route::get('/offer/{id}/delete', [offerController::class, 'delete'])->name('offer.delete');
+
+
+//profilecontroller
+
+Route::get('/aprofile',[adminprofilecontroller::class,'index'])->name('adminprofile.index');

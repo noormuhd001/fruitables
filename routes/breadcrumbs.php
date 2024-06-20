@@ -113,3 +113,7 @@ Breadcrumbs::for('offer.edit', function ($trail, $id) {
     $trail->push('Edit ' . $offer->name, route('offer.edit', $id));
 });
 
+//profile
+Breadcrumbs::for('adminprofile.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Profile', route('adminprofile.index'));
+});
