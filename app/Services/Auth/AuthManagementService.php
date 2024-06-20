@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Models\order;
 use App\Models\User;
 
 class AuthManagementService
@@ -25,5 +26,21 @@ class AuthManagementService
         $user->save();
 
         return $user;
+    }
+
+    public function adminhome(){
+        $ordercount = order::all()->count();
+        $confirmed = order::where('status',1)->count();
+        $shipped = order::where('status',2)->count();
+     
+        $delivered = order::where('status',4)->count();
+       
+
+        return [
+         'ordercount' => $ordercount,
+         'confirmed'=>$confirmed,
+         'shipped'=>$shipped,
+         'delivered'=>$delivered,
+        ];
     }
 }

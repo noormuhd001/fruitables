@@ -24,6 +24,21 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function adminhome()
+    {
+        try {
+            $data = $this->authmanagementservice->adminhome();
+            if ($data) {
+                return view('welcome', $data);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
     public function signuppage()
     {
         return view('auth.signup');

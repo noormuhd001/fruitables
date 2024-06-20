@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Offercontroller;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/adminpage', function () {
-    return view('welcome');
-})->name('admindashboard');
+Route::get('/adminpage',[AuthController::class,'adminhome'])->name('admindashboard'); 
+
+ 
 
 
 //product controller
