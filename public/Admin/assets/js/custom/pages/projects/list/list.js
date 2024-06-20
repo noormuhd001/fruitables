@@ -19,7 +19,7 @@ var KTProjectList = {
                                 ],
                             },
                         ],
-                        labels: ["Confirmed", "Shipped", "Delivered"],
+                        labels: ["Shipped", "Confirmed", "Delivered"],
                     },
                     options: {
                         chart: { fontFamily: "inherit" },
