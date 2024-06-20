@@ -36,7 +36,7 @@
                     <form class="form w-100" id="login">
                         @csrf
                         <div class="text-center mb-10">
-                            <h1 class="text-dark mb-3">Sign In to Metronic</h1>
+                            <h1 class="text-dark mb-3">Sign In to Fruitables</h1>
                             <div class="text-gray-400 fw-bold fs-4">New Here?
                                 <a href="{{ route('signuppage') }}"
                                     class="link-primary fw-bolder">Create an Account</a>

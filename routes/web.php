@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('user.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('user.shop');
     Route::get('/logout', [HomeController::class, 'logout'])->name('user.logout');
+    Route::get('/profile',[HomeController::class,'profile'])->name('user.profile');
 
 
 
@@ -34,30 +35,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/shop/product/{id}', [ShopController::class, 'view'])->name('item.view');
 
 
+
     //review
 
-Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
-Route::get('/contact', [ReviewController::class, 'contact'])->name('user.contact');
+    Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
+    Route::get('/contact', [ReviewController::class, 'contact'])->name('user.contact');
 
-//cart
-
-
-Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
-Route::post('/addtocart', [CartController::class, 'addTocart'])->name('user.addtocart');
-Route::post('/cart/remove/{id}', [CartController::class, 'delete'])->name('cart.remove');
-Route::post('/cart/update/{id}', [CartController::class, 'updatequantity'])->name('cart.updateQuantity');
-Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
-Route::get('/cart/checkout',[CartController::class,'checkout'])->name('checkout');
-
-//order
-
-Route::post('/order',[orderController::class,'placeorder'])->name('order.place');
-Route::get('/orderstatus',[OrderController::class,'orderstatus'])->name('order.status');
-Route::get('/orderstatus/{id}',[OrderController::class,'orderview'])->name('order.detail');
+    //cart
 
 
+    Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
+    Route::post('/addtocart', [CartController::class, 'addTocart'])->name('user.addtocart');
+    Route::post('/cart/remove/{id}', [CartController::class, 'delete'])->name('cart.remove');
+    Route::post('/cart/update/{id}', [CartController::class, 'updatequantity'])->name('cart.updateQuantity');
+    Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
+    Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 
+    //order
+
+    Route::post('/order', [orderController::class, 'placeorder'])->name('order.place');
+    Route::get('/orderstatus', [OrderController::class, 'orderstatus'])->name('order.status');
+    Route::get('/orderstatus/{id}', [OrderController::class, 'orderview'])->name('order.detail');
 });
 
 
@@ -76,6 +75,3 @@ Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->name('
 Route::post('/forgot/mail', [AuthController::class, 'email'])->name('forgot.email');
 Route::get('/verification/{email}', [AuthController::class, 'verify'])->name('email.verify');
 Route::post('/confirmpassword/submit', [AuthController::class, 'submit'])->name('confirmpassword');
-
-
-

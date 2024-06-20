@@ -48,7 +48,7 @@
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
                             <a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a>
                             <a href="{{ route('order.status') }}" class="dropdown-item">Orders</a>
-                            <a href="testimonial.html" class="dropdown-item">Profile</a>
+                            <a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a>
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>

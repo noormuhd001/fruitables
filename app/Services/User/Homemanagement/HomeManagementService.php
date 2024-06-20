@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\categories;
 use App\Models\offer;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeManagementService
@@ -31,6 +32,14 @@ class HomeManagementService
             'product' => $product,
             'categories' => $categories,
             'offerproducts' => $offerproducts
+        ];
+    }
+
+    public function profile(){
+        $id = auth()->id();
+        $user = User::findOrFail($id);
+        return [
+         'user'=>$user,
         ];
     }
 }

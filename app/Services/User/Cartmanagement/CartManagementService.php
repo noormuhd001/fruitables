@@ -14,7 +14,7 @@ class CartManagementService
         return Cart::where('user_id', $userId)->get();
     }
 
-    public function addToCart($productId)
+    public function addToCart($productId,$request)
     {
         $product = Product::findOrFail($productId);
         $userId = Auth::id();
@@ -33,7 +33,7 @@ class CartManagementService
             $cart->name = $product->name;
             $cart->price = $product->price;
             $cart->photo = $product->photo;
-            $cart->quantity = 1;
+            $cart->quantity = $request->quantity ?? 1; 
             $cart->save();
         }
 
