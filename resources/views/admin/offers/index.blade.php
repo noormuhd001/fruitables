@@ -52,7 +52,7 @@
                             <th class="min-w-125px">Start Date</th>
                             <th class="min-w-125px">End Date</th>
                             <th class="min-w-125px">Stock</th>
-                            <th class="text-end min-w-100px">Actions</th>
+                            <th class="text-end min-w-100px" colspan="2">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">

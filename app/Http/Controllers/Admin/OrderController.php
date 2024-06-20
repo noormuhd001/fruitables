@@ -38,7 +38,7 @@ class OrderController extends Controller
                 $order = order::select('*')->latest();
                 return DataTables::of($order)
                     ->addColumn('action', function ($order) {
-                        return '<a href="' . route('order.adminorderview', $order->id) . '" class="btn btn-primary">View</a>';
+                        return '<a href="' . route('order.adminorderview', $order->id) . '" class="btn btn btn-primary btn-sm">View</a>';
                     })
                     ->rawColumns(['action'])
                     ->make(true);

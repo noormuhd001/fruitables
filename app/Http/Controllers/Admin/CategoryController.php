@@ -101,10 +101,11 @@ class CategoryController extends Controller
         if ($request->ajax()) {
             $category = categories::select('*');
             return DataTables::of($category)
-                ->addColumn('action', function ($category) {
-                    return '<a href="' . route('category.edit', $category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                        <a href="' . route('category.delete', $category->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
-                })
+            ->addColumn('action', function ($category) {
+                return '<a href="' . route('category.edit', $category->id) . '" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="' . route('category.delete', $category->id) . '" class="btn btn-danger btn-sm">Delete</a>';
+            })
+            
                 ->rawColumns(['action'])
                 ->make(true);
         }

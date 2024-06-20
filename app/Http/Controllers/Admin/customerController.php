@@ -86,8 +86,8 @@ class customerController extends Controller
             $customer = User::where('role', 0);
             return DataTables::of($customer)
                 ->addColumn('action', function ($customer) {
-                    return '<a href="' . route('customer.edit', $customer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('customer.delete', $customer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                    return '<a href="' . route('customer.edit', $customer->id) . '" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="' . route('customer.delete', $customer->id) . '" class="btn btn-danger btn-sm">Delete</a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);

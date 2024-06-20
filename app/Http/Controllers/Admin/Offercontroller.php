@@ -41,8 +41,8 @@ class Offercontroller extends Controller
                 $offer = offer::select('*');
                 return DataTables::of($offer)
                     ->addColumn('action', function ($offer) {
-                        return '<a href="' . route('offer.edit', $offer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Edit</a>
-                            <a href="' . route('offer.delete', $offer->id) . '" class="btn btn-light btn-active-light-primary btn-sm">Delete</a>';
+                        return '<a href="' . route('offer.edit', $offer->id) . '" class="btn btn btn-primary btn-sm">Edit</a>
+                            <a href="' . route('offer.delete', $offer->id) . '" class="btn btn btn-danger btn-sm">Delete</a>';
                     })
                     ->rawColumns(['action'])
                     ->make(true);
