@@ -27,16 +27,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('user.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('user.shop');
     Route::get('/logout', [HomeController::class, 'logout'])->name('user.logout');
-    Route::get('/profile',[HomeController::class,'profile'])->name('user.profile');
-
-
-
+    Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
     Route::get('/shop/product/{id}', [ShopController::class, 'view'])->name('item.view');
     Route::get('/shop/offerproduct/{id}', [ShopController::class, 'detailview'])->name('offeritem.view');
-    Route::get('/shop/offer',[ShopController::class,'offerview'])->name('user.featuredproducts');
-    Route::post('/shop/offer/addtocart',[ShopController::class,'addtocart'])->name('user.offeraddtocart');
-
+    Route::get('/shop/offer', [ShopController::class, 'offerview'])->name('user.featuredproducts');
+    Route::post('/shop/offer/addtocart', [ShopController::class, 'addtocart'])->name('user.offeraddtocart');
 
     //review
 
@@ -59,21 +55,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/order', [orderController::class, 'placeorder'])->name('order.place');
     Route::get('/orderstatus', [OrderController::class, 'orderstatus'])->name('order.status');
     Route::get('/orderstatus/{id}', [OrderController::class, 'orderview'])->name('order.detail');
-    Route::get('/order/{id}/invoice', [OrderController::class,'downloadInvoice'])->name('order.invoice');
-
+    Route::get('/order/{id}/invoice', [OrderController::class, 'downloadInvoice'])->name('order.invoice');
 });
-
-
-
-
 
 Route::get('/', [AuthController::class, 'loginpage'])->name('loginpage');
 Route::get('/signuppage', [AuthController::class, 'signuppage'])->name('signuppage');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/adminlogout', [AuthController::class, 'adminLogout'])->name('admin.logout');
-
-
 
 Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->name('forgotpassword');
 Route::post('/forgot/mail', [AuthController::class, 'email'])->name('forgot.email');
