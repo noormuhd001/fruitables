@@ -89,7 +89,9 @@
               </p>
             </div>
         </div>
-
+        <a href="{{ route('order.invoice', ['id' => $orders->id]) }}" class="btn btn-secondary">
+            Download Invoice
+        </a>
     </div>
 </div>
 @endsection
