@@ -26,7 +26,7 @@ class userstoreRequest extends FormRequest
               'name'=>'required|string',
               'phone'=>'required|string|',
             'password'=>'required|string',
-            'email' => 'required|string|email|unique:users,email',
+            'email' => 'required|string|email',
            
         ];
     }

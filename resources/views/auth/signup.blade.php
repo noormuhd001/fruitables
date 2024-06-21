@@ -70,7 +70,7 @@
                             <label class="form-label fw-bolder text-dark fs-6">phone</label>
                             <input
                                 class="form-control form-control-lg form-control-solid @error('phone') is-invalid @enderror"
-                                type="text" placeholder="Enter Your Phone No" name="phone"
+                                type="number" placeholder="Enter Your Phone No" name="phone"
                                 value="{{ old('phone') }}" />
                             @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>

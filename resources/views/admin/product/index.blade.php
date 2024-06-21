@@ -22,7 +22,8 @@
 
     <div class="container">
         <div class="card">
-            <div class="d-flex align-items-center position-relative my-1">
+            <div class="card-header border-0 pt-6">
+            <div class="d-flex align-items-center position-relative my-1 w-1000px">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -38,7 +39,7 @@
                     placeholder="Search Product" />
 
                 <div class="ms-auto">
-                    <div class="card-toolbar">
+                    <div class="card-toolbar float-lg-end">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
                                 data-kt-menu-placement="bottom-end">
@@ -106,12 +107,13 @@
                             <th class="min-w-125px">Basic Description</th>
                             <th class="min-w-125px">Full Description</th>
                             <th class="min-w-125px">Stock</th>
-                            <th class="text-end min-w-100px">Actions</th>
+                            <th class="text-end min-w-100px" colspan="2">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>

@@ -22,6 +22,7 @@
 
     <div class="container">
         <div class="card">
+            <div class="card-header border-0 pt-6">
             <div class="d-flex align-items-center position-relative my-1">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
@@ -43,16 +44,16 @@
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                     <thead>
                         <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-125px">Name</th>
-                            <th class="min-w-125px">Image</th>
-                            <th class="min-w-125px"> Description</th>
-                            <th class="min-w-125px">Price</th>
-                            <th class="min-w-125px">Percentage</th>
-                            <th class="min-w-125px">Discount Price</th>
-                            <th class="min-w-125px">Start Date</th>
-                            <th class="min-w-125px">End Date</th>
-                            <th class="min-w-125px">Stock</th>
-                            <th class="text-end min-w-100px" colspan="2">Actions</th>
+                            <th class="min w-auto">Name</th>
+                            <th class="min w-auto">Image</th>
+                            <th class="min w-auto"> Description</th>
+                            <th class="min w-auto">Price</th>
+                            <th class="min w-auto">Percentage</th>
+                            <th class="min w-auto">Discount Price</th>
+                            <th class="min w-auto">Start Date</th>
+                            <th class="min w-auto">End Date</th>
+                            <th class="min w-auto">Stock</th>
+                            <th colspan="2">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-bold">
@@ -61,6 +62,8 @@
             </div>
         </div>
     </div>
+    </div>
+    
 
     @if ($errors->any())
         <div class="alert alert-danger">
