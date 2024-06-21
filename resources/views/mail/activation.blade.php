@@ -64,7 +64,7 @@
         <p>If you did not create an account, no further action is required.</p>
         <div class="footer">
             <p>Thank you,</p>
-            <p>Assetrack</p>
+            <p>Fruitables</p>
         </div>
     </div>
 </body>
