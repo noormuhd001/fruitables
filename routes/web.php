@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/order', [orderController::class, 'placeorder'])->name('order.place');
     Route::get('/orderstatus', [OrderController::class, 'orderstatus'])->name('order.status');
     Route::get('/orderstatus/{id}', [OrderController::class, 'orderview'])->name('order.detail');
+    Route::get('/order/{id}/invoice', [OrderController::class,'downloadInvoice'])->name('order.invoice');
+
 });
 
 

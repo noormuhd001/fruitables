@@ -10,6 +10,7 @@ use App\Models\orderitem;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Services\Admin\Ordermanagement\OrderManagementService;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -125,4 +126,17 @@ class OrderController extends Controller
             return abort(500);
         }
     }
+
+
+
+public function downloadInvoice($id)
+{
+    $order = Order::findOrFail($id);
+    $orderItems = OrderItem::where('order_id', $id)->get();
+
+    $pdf = Pdf::loadView('user.order.invoice', compact('order', 'orderItems'));
+
+    return $pdf->download('invoice_' . $order->id . '.pdf');
+}
+
 }
