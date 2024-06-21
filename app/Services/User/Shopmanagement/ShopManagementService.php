@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ShopManagementService
 {
  public function getdata($id){
-    $review = Review::all();
+    $review = Review::where('product_id',$id)->get();
     $categories = categories::all();
     $product = Product::findOrFail($id);
     $offerproducts = offer::all();
@@ -28,7 +28,7 @@ class ShopManagementService
  }
 
  public function getofferdata($id){
-    $review = Review::all();
+    $review = Review::where('product_id',$id)->get();
     $categories = categories::all();
     $offer = offer::findOrFail($id);
     $offerproducts = offer::all();

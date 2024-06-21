@@ -10,6 +10,7 @@ class ReviewManagementService
 {
  public function store($data){
     $review = new Review;
+    $review->product_id = $data->id;
     $review->name = $data->name;
     $review->email = $data->email;
     $review->review = $data->review;

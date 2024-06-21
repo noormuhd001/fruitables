@@ -175,6 +175,7 @@
                         {{-- form --}}
                         <form id="postreview" method="POST" action="{{ route('review.post') }}">
                             @csrf
+                            <input type="hidden" name="id" id="id" value="{{ $offer->id }}">
                             <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                             <div class="row g-4">
                                 <div class="col-lg-6">
