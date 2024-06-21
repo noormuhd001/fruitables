@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\forgotpassword;
+use App\Jobs\sendmailjob;
 use App\Services\Auth\AuthManagementService;
 
 class AuthController extends Controller
@@ -49,6 +50,7 @@ class AuthController extends Controller
         try {
             $user = $this->authmanagementservice->signup($request);
             if ($user) {
+                dispatch(new sendmailjob($user));
                 return response()->json(['data' => true, 'route' => route('loginpage'), 'message' => 'user registered successfull']);
             } else {
                 return abort(404);
@@ -135,6 +137,24 @@ class AuthController extends Controller
             $user = $this->authmanagementservice->submit($request);
             if ($user) {
                 return response()->json(['data' => true, 'route' => route('loginpage')]);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+
+    public function activate($id)
+    {
+        try {
+            $user = $this->authmanagementservice->activate($id);
+            if ($user) {
+                $user->isActive = 1;
+                $user->verification = null;
+                $user->save();
+                return view('mail.success', ['user' => $user]);
             } else {
                 return abort(404);
             }

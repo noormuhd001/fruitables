@@ -68,3 +68,4 @@ Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->name('
 Route::post('/forgot/mail', [AuthController::class, 'email'])->name('forgot.email');
 Route::get('/verification/{email}', [AuthController::class, 'verify'])->name('email.verify');
 Route::post('/confirmpassword/submit', [AuthController::class, 'submit'])->name('confirmpassword');
+Route::get('/activate/{id}', [AuthController::class, 'activate'])->name('user.activate');
