@@ -4,11 +4,13 @@ namespace App\Services\Auth;
 
 use App\Models\order;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class AuthManagementService
 {
     public function signup($data){
         $user = new User();
+        $user->verification = str::uuid()->toString();
         $user->name = $data->name;
         $user->email = $data->email;
         $user->phone = $data->phone;
@@ -42,5 +44,12 @@ class AuthManagementService
          'shipped'=>$shipped,
          'delivered'=>$delivered,
         ];
+    }
+
+
+    public function activate($id)
+    {
+        $user = User::where('verification', $id)->first();
+        return $user;
     }
 }
