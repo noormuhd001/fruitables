@@ -31,13 +31,13 @@
                             <h4 class="fw-bold mb-3">{{ $product->name }}</h4>
                             <p class="mb-3">Category: {{ $product->category }}</p>
                             <h5 class="fw-bold mb-3">{{ $product->price }} $</h5>
-                            <div class="d-flex mb-4">
+                            {{-- <div class="d-flex mb-4">
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star"></i>
-                            </div>
+                            </div> --}}
                             <p class="mb-4">{{ $product->basicdescription }}</p>
 
                             <form action="{{ route('user.addtocart') }}" method="POST">
@@ -239,13 +239,11 @@
                         </div>
                         <div class="col-lg-12">
                             <h4 class="mb-3">Featured products</h4>
-                            @foreach ($offerproducts as $offerproduct )
-                                
-                        
-                            
+                            @foreach ($offerproducts as $offerproduct)
                                 <div class="d-flex align-items-center justify-content-start mb-3">
                                     <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded" alt="">
+                                        <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded"
+                                            alt="">
                                     </div>
                                     <div>
                                         <h6 class="mb-2">{{ $offerproduct->title }}</h6>
@@ -258,14 +256,16 @@
                                         </div> --}}
                                         <div class="d-flex mb-2">
                                             <h5 class="fw-bold me-2">${{ $offerproduct->discount }}</h5>
-                                            <h5 class="text-danger text-decoration-line-through">${{ $offerproduct->price }}</h5>
+                                            <h5 class="text-danger text-decoration-line-through">
+                                                ${{ $offerproduct->price }}</h5>
                                         </div>
                                     </div>
                                 </div>
-                           
                             @endforeach
                             <div class="d-flex justify-content-center my-4">
-                                <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">View More</a>
+                                <a href="#"
+                                    class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">View
+                                    More</a>
                             </div>
                         </div>
                         <div class="col-lg-12">
