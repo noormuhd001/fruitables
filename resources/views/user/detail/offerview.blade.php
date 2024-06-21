@@ -23,14 +23,23 @@
                             <div class="border rounded">
 
                                 <a href="#">
-                                    <img src="{{ asset($product->photo) }}" class="img-fluid rounded" alt="Image">
+                                    <img src="{{ asset($offer->photo) }}" class="img-fluid rounded" alt="Image">
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h4 class="fw-bold mb-3">{{ $product->name }}</h4>
-                            <p class="mb-3">Category: {{ $product->category }}</p>
-                            <h5 class="fw-bold mb-3">{{ $product->price }} $</h5>
+                            <h4 class="fw-bold mb-3">{{ $offer->name }}</h4>
+                            <p class="mb-3">Category: {{ $offer->category }}</p>
+                            <p class="text-dark fs-5 fw-bold mb-0">
+                            <span style="text-decoration: line-through;">{{ $offer->price }}/kg</span>
+                            <span class="text-danger ms-2">
+                                {{ $offer->discount }}/kg
+                            </span>
+                            <br>
+                            <span class="text-success">
+                                {{ $offer->offer_percentage }}% off
+                            </span>
+                        </p>
                             {{-- <div class="d-flex mb-4">
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star text-secondary"></i>
@@ -38,9 +47,9 @@
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star"></i>
                             </div> --}}
-                            <p class="mb-4">{{ $product->basicdescription }}</p>
+                            <p class="mb-4">{{ $offer->description }}</p>
 
-                            <form action="{{ route('user.addtocart') }}" method="POST">
+                            <form action="{{ route('user.offeraddtocart') }}" method="POST">
                                 @csrf
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -56,7 +65,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="id" id="id" value="{{ $product->id }}">
+                                <input type="hidden" name="id" id="id" value="{{ $offer->id }}">
                                 <input type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"
                                     value="Add to cart">
                             </form>
@@ -76,7 +85,7 @@
                             <div class="tab-content mb-5">
                                 <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
 
-                                    <p>{{ $product->fulldescription }}</p>
+                                    <p>{{ $offer->fulldescription }}</p>
                                     <div class="px-2">
                                         <div class="row g-4">
                                             <div class="col-6">
@@ -131,7 +140,7 @@
                                     aria-labelledby="nav-mission-tab">
                                     <div class="d-flex">
                                         @foreach ($review as $reviews)
-                                            <div class="">
+                                            <div class="container-fluid">
 
 
 
@@ -166,7 +175,7 @@
                         {{-- form --}}
                         <form id="postreview" method="POST" action="{{ route('review.post') }}">
                             @csrf
-                            <input type="hidden" name="id" id="id" value="{{ $product->id }}">
+                            <input type="hidden" name="id" id="id" value="{{ $offer->id }}">
                             <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         
                             @if ($errors->any())
@@ -225,7 +234,6 @@
                                 </div>
                             </div>
                         </form>
-                        
 
 
 
