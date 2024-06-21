@@ -29,6 +29,17 @@ class ShopController extends Controller
         }
     }
 
+    public function detailview($id){
+        try {
+            $data = $this->shopmanagementservice->getofferdata($id);
+            return view('user.detail.offerview', $data);
+        } catch (\Exception $e) {
+
+            report($e);
+            return abort(500);
+        }
+    }
+
     public function offerview()
     {
         try {

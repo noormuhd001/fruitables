@@ -27,6 +27,22 @@ class ShopManagementService
     ];
  }
 
+ public function getofferdata($id){
+    $review = Review::all();
+    $categories = categories::all();
+    $offer = offer::findOrFail($id);
+    $offerproducts = offer::all();
+    $allproducts = Product::all();
+
+    return [
+        'offer' => $offer,
+        'categories' => $categories,
+        'allproducts' => $allproducts,
+        'offerproducts'=>$offerproducts,
+        'review' => $review,
+    ];
+ }
+
  public function offerview(){
     $offer = offer::all();
     return [
