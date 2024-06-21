@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/shop/product/{id}', [ShopController::class, 'view'])->name('item.view');
     Route::get('/shop/offer',[ShopController::class,'offerview'])->name('user.featuredproducts');
+    Route::post('/shop/offer/addtocart',[ShopController::class,'addtocart'])->name('user.offeraddtocart');
 
 
     //review
