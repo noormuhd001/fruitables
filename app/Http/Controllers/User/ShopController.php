@@ -29,4 +29,20 @@ class ShopController extends Controller
             return abort(500);
         }
     }
+
+    public function offerview()
+    {
+        try {
+            $data = $this->shopmanagementservice->offerview();
+            if ($data) {
+                return view('user.home.offer', ['data' => $data]);
+            } else {
+                return abort(404);
+            }
+        } catch (\Exception $e) {
+            report($e);
+            return abort(500);
+        }
+    }
+    
 }

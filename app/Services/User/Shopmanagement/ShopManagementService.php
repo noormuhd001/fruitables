@@ -24,4 +24,11 @@ class ShopManagementService
         'review' => $review,
     ];
  }
+
+ public function offerview(){
+    $offer = offer::all();
+    return [
+      'offer' => $offer,
+    ];
+ }
 }

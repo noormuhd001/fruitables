@@ -23,7 +23,7 @@ class HomeController extends Controller
             if ($data) {
                 return view('user.home.index', $data);
             } else {
-                abort(404);
+                return abort(404);
             }
         } catch (\Exception $e) {
             report($e);
@@ -38,7 +38,7 @@ class HomeController extends Controller
             if ($data) {
                 return view('user.home.shop', $data);
             } else {
-                abort(404);
+               return abort(404);
             }
         } catch (\Exception $e) {
             report($e);

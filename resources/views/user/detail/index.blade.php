@@ -263,7 +263,7 @@
                                 </div>
                             @endforeach
                             <div class="d-flex justify-content-center my-4">
-                                <a href="#"
+                                <a href="{{ route('user.featuredproducts') }}"
                                     class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">View
                                     More</a>
                             </div>
