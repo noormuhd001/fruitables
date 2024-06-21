@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Services\User\Reviewmanagement;
-
-use App\Models\categories;
-use App\Models\Product;
 use App\Models\Review;
 
 class ReviewManagementService

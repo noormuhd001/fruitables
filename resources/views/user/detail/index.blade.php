@@ -168,31 +168,47 @@
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{ $product->id }}">
                             <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                        
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        
                             <div class="row g-4">
                                 <div class="col-lg-6">
                                     <div class="border-bottom rounded">
-                                        <input type="text" class="form-control border-0 me-4" id="name"
-                                            name="name" placeholder="Your Name *" required>
+                                        <input type="text" class="form-control border-0 me-4" id="name" name="name" placeholder="Your Name *" value="{{ old('name') }}" required>
+                                        @if ($errors->has('name'))
+                                            <div class="text-danger">{{ $errors->first('name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="border-bottom rounded">
-                                        <input type="email" class="form-control border-0" id="email"
-                                            name="email" placeholder="Your Email *" required>
+                                        <input type="email" class="form-control border-0" id="email" name="email" placeholder="Your Email *" value="{{ old('email') }}" required>
+                                        @if ($errors->has('email'))
+                                            <div class="text-danger">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="border-bottom rounded my-4">
-                                        <textarea id="review" class="form-control border-0" name="review" cols="30" rows="8"
-                                            placeholder="Your Review *" spellcheck="false" required></textarea>
+                                        <textarea id="review" class="form-control border-0" name="review" cols="30" rows="8" placeholder="Your Review *" spellcheck="false" required>{{ old('review') }}</textarea>
+                                        @if ($errors->has('review'))
+                                            <div class="text-danger">{{ $errors->first('review') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="d-flex justify-content-between py-3 mb-5">
                                         <div class="d-flex align-items-center">
                                             <p class="mb-0 me-3">Please rate:</p>
-                                            <div class="d-flex align-items-center" style="font-size: 12px;"
-                                                id="star-rating">
+                                            <div class="d-flex align-items-center" style="font-size: 12px;" id="star-rating">
                                                 <i class="fa fa-star text-muted" data-value="1"></i>
                                                 <i class="fa fa-star text-muted" data-value="2"></i>
                                                 <i class="fa fa-star text-muted" data-value="3"></i>
@@ -200,14 +216,16 @@
                                                 <i class="fa fa-star text-muted" data-value="5"></i>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="rating" name="rating">
-                                        <button type="submit"
-                                            class="btn border border-secondary text-primary rounded-pill px-4 py-3"
-                                            id="submitBtn">Post Comment</button>
+                                        <input type="hidden" id="rating" name="rating" value="{{ old('rating') }}">
+                                        @if ($errors->has('rating'))
+                                            <div class="text-danger">{{ $errors->first('rating') }}</div>
+                                        @endif
+                                        <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3" id="submitBtn">Post Comment</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        
 
 
 
