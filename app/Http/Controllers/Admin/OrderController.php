@@ -82,10 +82,10 @@ class OrderController extends Controller
         }
     }
 
-    public function orderview($id)
+    public function orderview($slug)
     {
         try {
-            $data = $this->ordermanagementservice->orderview($id);
+            $data = $this->ordermanagementservice->orderview($slug);
             if ($data) {
                 return view('user.order.view', $data);
             } else {
