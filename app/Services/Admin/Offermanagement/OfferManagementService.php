@@ -2,13 +2,14 @@
 
 namespace App\Services\Admin\Offermanagement;
 
-use App\Models\categories;
+
 use App\Models\offer;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OfferManagementService
 {
-    public function store($data){
+    public function store($data)
+    {
         $offer = new offer();
         $offer->title = $data->title;
         $offer->discount = $data->discount;
@@ -19,7 +20,8 @@ class OfferManagementService
         $offer->price = $data->price;
         $offer->start_date = $data->start_date;
         $offer->end_date = $data->end_date;
-
+        $offer->SKU = str::uuid();
+        $offer->slug = str::slug($offer->SKU . ' ' . $offer->description . ' ' . now());
         // Handle file upload if you have a photo field
         if ($data->hasFile('photo')) {
             $file = $data->file('photo');
@@ -32,13 +34,15 @@ class OfferManagementService
 
         return $offer;
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $offer = offer::findOrFail($id);
         $offer->delete();
-        
+
         return $offer;
     }
-    public function update($data){
+    public function update($data)
+    {
         $id = $data->id;
         $offer = Offer::findOrFail($id);
         $offer->title = $data->title;

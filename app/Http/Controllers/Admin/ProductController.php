@@ -79,7 +79,7 @@ class ProductController extends Controller
         try {
             $product = $this->productmanagementservice->store($request);
             if ($product) {
-                return redirect()->back()->with('success', 'product added successfully!');
+                return redirect()->route('product.index')->with('success', 'product added successfully!');
             } else {
                 return abort(404);
             }

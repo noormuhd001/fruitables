@@ -67,7 +67,7 @@
                                             <form action="{{ route('user.offeraddtocart') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $products->id }}" id="id">
-                                                <a href="{{ route('offeritem.view', ['id' => $products->id]) }}">
+                                                <a href="{{ route('offeritem.view', ['id' => $products->slug]) }}">
                                                     <div class="fruite-img">
                                                         <img src="{{ asset($products->photo) }}" class="img-fluid w-100 rounded-top" alt="img">
                                                     </div>
