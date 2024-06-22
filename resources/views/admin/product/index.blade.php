@@ -23,7 +23,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header border-0 pt-6">
-            <div class="d-flex align-items-center position-relative my-1 w-1000px">
+            <div class="d-flex align-items-center position-relative my-1 w-100">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -90,6 +90,26 @@
                                     <!--end::Actions-->
                                 </div>
                                 <!--end::Content-->
+                            </div>
+                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                <!--begin::Add category-->
+                                <a href="{{ route('product.add') }}">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_add_product">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none">
+                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                                                transform="rotate(-90 11.364 20.364)" fill="black" />
+                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->Add Product
+                                </button>
+                                </a>
+                                <!--end::Add user-->
                             </div>
                         </div>
                     </div>
