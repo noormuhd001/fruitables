@@ -56,7 +56,7 @@
                             @endswitch
                         </td>
                         <td>
-                            <a href="{{ route('order.detail', ['id' => $order->id]) }}">
+                            <a href="{{ route('order.detail', ['slug' => $order->slug]) }}">
                                 <button class="btn btn-primary">View</button>
                             </a>
                         </td>                     
