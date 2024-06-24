@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Invoice</title>
     <style>
@@ -14,49 +15,61 @@
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #555;
         }
+
         .invoice-box table {
             width: 100%;
             line-height: inherit;
             text-align: left;
         }
+
         .invoice-box table td {
             padding: 5px;
             vertical-align: top;
         }
+
         .invoice-box table tr td:nth-child(2) {
             text-align: right;
         }
+
         .invoice-box table tr.top table td {
             padding-bottom: 20px;
         }
+
         .invoice-box table tr.top table td.title {
             font-size: 45px;
             line-height: 45px;
             color: #333;
         }
+
         .invoice-box table tr.information table td {
             padding-bottom: 40px;
         }
+
         .invoice-box table tr.heading td {
             background: #eee;
             border-bottom: 1px solid #ddd;
             font-weight: bold;
         }
+
         .invoice-box table tr.details td {
             padding-bottom: 20px;
         }
+
         .invoice-box table tr.item td {
             border-bottom: 1px solid #eee;
         }
+
         .invoice-box table tr.item.last td {
             border-bottom: none;
         }
+
         .invoice-box table tr.total td:nth-child(2) {
             border-top: 2px solid #eee;
             font-weight: bold;
         }
     </style>
 </head>
+
 <body>
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
@@ -109,21 +122,23 @@
                 <td>Price</td>
             </tr>
             @foreach ($orderItems as $item)
-            <tr class="item">
-                <td>{{ $item->name }}</td>
-                <td>${{ number_format($item->price, 2) }}</td>
-            </tr>
+                <tr class="item">
+                    <td>{{ $item->name }}</td>
+                    <td>${{ number_format($item->price, 2) }}</td>
+                </tr>
             @endforeach
             <tr class="total">
                 <td><strong>
-                    Delivary fee: $@if ($order->total_amount > 1000)
-                    0
-                    @else
-                    50
-                @endif</strong></td>
+                        Delivary fee: $@if ($order->total_amount > 1000)
+                            0
+                        @else
+                            50
+                        @endif
+                    </strong></td>
                 <td>Total: ${{ number_format($order->total_amount, 2) }}</td>
             </tr>
         </table>
     </div>
 </body>
+
 </html>

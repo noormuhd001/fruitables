@@ -11,8 +11,6 @@
         </ol>
     </div>
     <!-- Single Page Header End -->
-
-
     <!-- Single Product Start -->
     <div class="container-fluid py-5 mt-5">
         <div class="container py-5">
@@ -21,7 +19,6 @@
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="border rounded">
-
                                 <a href="#">
                                     <img src="{{ asset($offer->photo) }}" class="img-fluid rounded" alt="Image">
                                 </a>
@@ -31,15 +28,15 @@
                             <h4 class="fw-bold mb-3">{{ $offer->name }}</h4>
                             <p class="mb-3">Category: {{ $offer->category }}</p>
                             <p class="text-dark fs-5 fw-bold mb-0">
-                            <span style="text-decoration: line-through;">{{ $offer->price }}/kg</span>
-                            <span class="text-danger ms-2">
-                                {{ $offer->discount }}/kg
-                            </span>
-                            <br>
-                            <span class="text-success">
-                                {{ $offer->offer_percentage }}% off
-                            </span>
-                        </p>
+                                <span style="text-decoration: line-through;">{{ $offer->price }}/kg</span>
+                                <span class="text-danger ms-2">
+                                    {{ $offer->discount }}/kg
+                                </span>
+                                <br>
+                                <span class="text-success">
+                                    {{ $offer->offer_percentage }}% off
+                                </span>
+                            </p>
                             {{-- <div class="d-flex mb-4">
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star text-secondary"></i>
@@ -141,9 +138,6 @@
                                     <div class="d-flex">
                                         @foreach ($review as $reviews)
                                             <div class="container-fluid">
-
-
-
                                                 <p class="mb-2" style="font-size: 14px;">{{ $reviews->created_at }}</p>
                                                 <div class="d-flex justify-content-between">
                                                     <h5>{{ $reviews->name }}</h5>
@@ -156,7 +150,6 @@
                                                     </div>
                                                 </div>
                                                 <p>{{ $reviews->review }} </p>
-
                                             </div>
                                         @endforeach
                                     </div>
@@ -177,7 +170,7 @@
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{ $offer->id }}">
                             <h4 class="mb-5 fw-bold">Leave a Reply</h4>
-                        
+
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -187,11 +180,12 @@
                                     </ul>
                                 </div>
                             @endif
-                        
                             <div class="row g-4">
                                 <div class="col-lg-6">
                                     <div class="border-bottom rounded">
-                                        <input type="text" class="form-control border-0 me-4" id="name" name="name" placeholder="Your Name *" value="{{ old('name') }}" required>
+                                        <input type="text" class="form-control border-0 me-4" id="name"
+                                            name="name" placeholder="Your Name *" value="{{ old('name') }}"
+                                            required>
                                         @if ($errors->has('name'))
                                             <div class="text-danger">{{ $errors->first('name') }}</div>
                                         @endif
@@ -199,7 +193,9 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="border-bottom rounded">
-                                        <input type="email" class="form-control border-0" id="email" name="email" placeholder="Your Email *" value="{{ old('email') }}" required>
+                                        <input type="email" class="form-control border-0" id="email"
+                                            name="email" placeholder="Your Email *" value="{{ old('email') }}"
+                                            required>
                                         @if ($errors->has('email'))
                                             <div class="text-danger">{{ $errors->first('email') }}</div>
                                         @endif
@@ -207,7 +203,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="border-bottom rounded my-4">
-                                        <textarea id="review" class="form-control border-0" name="review" cols="30" rows="8" placeholder="Your Review *" spellcheck="false" required>{{ old('review') }}</textarea>
+                                        <textarea id="review" class="form-control border-0" name="review" cols="30" rows="8"
+                                            placeholder="Your Review *" spellcheck="false" required>{{ old('review') }}</textarea>
                                         @if ($errors->has('review'))
                                             <div class="text-danger">{{ $errors->first('review') }}</div>
                                         @endif
@@ -217,7 +214,8 @@
                                     <div class="d-flex justify-content-between py-3 mb-5">
                                         <div class="d-flex align-items-center">
                                             <p class="mb-0 me-3">Please rate:</p>
-                                            <div class="d-flex align-items-center" style="font-size: 12px;" id="star-rating">
+                                            <div class="d-flex align-items-center" style="font-size: 12px;"
+                                                id="star-rating">
                                                 <i class="fa fa-star text-muted" data-value="1"></i>
                                                 <i class="fa fa-star text-muted" data-value="2"></i>
                                                 <i class="fa fa-star text-muted" data-value="3"></i>
@@ -225,19 +223,18 @@
                                                 <i class="fa fa-star text-muted" data-value="5"></i>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="rating" name="rating" value="{{ old('rating') }}">
+                                        <input type="hidden" id="rating" name="rating"
+                                            value="{{ old('rating') }}">
                                         @if ($errors->has('rating'))
                                             <div class="text-danger">{{ $errors->first('rating') }}</div>
                                         @endif
-                                        <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3" id="submitBtn">Post Comment</button>
+                                        <button type="submit"
+                                            class="btn border border-secondary text-primary rounded-pill px-4 py-3"
+                                            id="submitBtn">Post Comment</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
-
-
-
-
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3">
@@ -261,7 +258,6 @@
                                         </li>
                                     @endforeach
                                 </ul>
-
                             </div>
                         </div>
                         <div class="col-lg-12">

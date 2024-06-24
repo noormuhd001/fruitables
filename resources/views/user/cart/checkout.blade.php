@@ -4,7 +4,6 @@
     @php
         $subtotal = 0;
     @endphp
-
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="mb-4">Billing details</h1>
@@ -16,7 +15,8 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="form-item w-100">
                                     <label class="form-label my-3">First Name<sup>*</sup></label>
-                                    <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" value="{{ old('firstname') }}">
+                                    <input type="text" class="form-control @error('firstname') is-invalid @enderror"
+                                        name="firstname" id="firstname" value="{{ old('firstname') }}">
                                     @error('firstname')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -25,7 +25,8 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="form-item w-100">
                                     <label class="form-label my-3">Last Name<sup>*</sup></label>
-                                    <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" value="{{ old('lastname') }}">
+                                    <input type="text" class="form-control @error('lastname') is-invalid @enderror"
+                                        name="lastname" id="lastname" value="{{ old('lastname') }}">
                                     @error('lastname')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -34,42 +35,49 @@
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Address <sup>*</sup></label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="House Number Street Name" name="address" id="address" value="{{ old('address') }}">
+                            <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                placeholder="House Number Street Name" name="address" id="address"
+                                value="{{ old('address') }}">
                             @error('address')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Town/City<sup>*</sup></label>
-                            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ old('city') }}">
+                            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"
+                                id="city" value="{{ old('city') }}">
                             @error('city')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Country<sup>*</sup></label>
-                            <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" id="country" value="{{ old('country') }}">
+                            <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"
+                                id="country" value="{{ old('country') }}">
                             @error('country')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
-                            <input type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" id="postcode" value="{{ old('postcode') }}">
+                            <input type="text" class="form-control @error('postcode') is-invalid @enderror"
+                                name="postcode" id="postcode" value="{{ old('postcode') }}">
                             @error('postcode')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Mobile<sup>*</sup></label>
-                            <input type="tel" class="form-control @error('mobile') is-invalid @enderror" name="mobile" id="mobile" value="{{ old('mobile') }}">
+                            <input type="tel" class="form-control @error('mobile') is-invalid @enderror" name="mobile"
+                                id="mobile" value="{{ old('mobile') }}">
                             @error('mobile')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Email Address<sup>*</sup></label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                                id="email" value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -80,10 +88,10 @@
                             <label class="form-check-label" for="Address-1">Ship to a different address?</label>
                         </div>
                         <div class="form-item">
-                            <textarea class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Order Notes (Optional)" name="ordernotes" id="ordernotes">{{ old('ordernotes') }}</textarea>
+                            <textarea class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Order Notes (Optional)"
+                                name="ordernotes" id="ordernotes">{{ old('ordernotes') }}</textarea>
                         </div>
                     </div>
-                    
                     <div class="col-md-12 col-lg-6 col-xl-5">
                         <div class="table-responsive">
                             <table class="table">
@@ -127,7 +135,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <input type="hidden" name="totalamount" id="totalamount" value="{{ $subtotal > 1000 ? $subtotal : $subtotal + 50 }}">
+                        <input type="hidden" name="totalamount" id="totalamount"
+                            value="{{ $subtotal > 1000 ? $subtotal : $subtotal + 50 }}">
                         <div class="form-check my-3">
                             <input class="form-check-input bg-primary border-0" type="checkbox" id="Delivery-1"
                                 name="Delivery" value="Delivery">
@@ -138,7 +147,7 @@
                                 class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place
                                 Order</button>
                         </div>
-                        <span id="message" ></span>
+                        <span id="message"></span>
                     </div>
                 </div>
             </form>
@@ -147,12 +156,11 @@
 @endsection
 
 @push('script')
-<script>
-    const LOGIN_ROUTE = "{{ route('order.place') }}";
-    const COMMITTEE_ROUTE = "{{ route('user.home') }}";
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-<script src="{{ asset('User\js\placeorder.js') }}"></script>
-
+    <script>
+        const LOGIN_ROUTE = "{{ route('order.place') }}";
+        const COMMITTEE_ROUTE = "{{ route('user.home') }}";
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="{{ asset('User\js\placeorder.js') }}"></script>
 @endpush

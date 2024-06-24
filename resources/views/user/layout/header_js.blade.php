@@ -4,7 +4,6 @@
 <script src="{{ asset('User/lib/waypoints/waypoints.min.js') }}"></script>
 <script src="{{ asset('User/lib/lightbox/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('User/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-
 <!-- Template Javascript -->
 <script src="{{ asset('User/js/main.js') }}"></script>
 <script>
@@ -21,7 +20,6 @@
             }
         });
     }
-
     // Call the function initially and set interval to update every 30 seconds
     $(document).ready(function() {
         updateCartCount(); // Initial call
