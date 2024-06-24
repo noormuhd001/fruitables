@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('breadcrumbs')
-{{ Breadcrumbs::render('customer.edit',$user->id) }}
+    {{ Breadcrumbs::render('customer.edit', $user->id) }}
 @endsection
 @section('section')
     @if ($errors->any())
@@ -51,7 +51,8 @@
                     </div>
                 </div>
                 <div class="text-center pt-15">
-                    <a href="{{ route('customer.index') }}"> <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>                    </a>
+                    <a href="{{ route('customer.index') }}"> <button type="reset" class="btn btn-light me-3"
+                            data-kt-users-modal-action="cancel">Discard</button> </a>
                     <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                         <span class="indicator-label">Submit</span>
                         <span class="indicator-progress">Please wait...

@@ -8,8 +8,7 @@
         <div class="page d-flex flex-row flex-column-fluid">
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                 @include('admin.layout.header')
-           
-                
+
                 <div class="content-header">
                     <div class="container">
                         <div class="row mb-2">
@@ -25,8 +24,6 @@
                     </div>
                 </div>
                 <br>
-
-                    
                 @yield('section')
                 @include('admin.layout.footer')
             </div>

@@ -1,9 +1,9 @@
 @extends('admin.layout.layout')
 
 @section('breadcrumbs')
-<div class="breadcrumbs">
-    {{ Breadcrumbs::render('category.edit', $category->id) }}
-</div>
+    <div class="breadcrumbs">
+        {{ Breadcrumbs::render('category.edit', $category->id) }}
+    </div>
 @endsection
 @section('section')
     @if ($errors->any())
@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <div class="text-center pt-15">
-                    <a href="{{ route('category.index') }}"><button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button></a>
+                    <a href="{{ route('category.index') }}"><button type="button" class="btn btn-light me-3"
+                            data-bs-dismiss="modal">Discard</button></a>
                     <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                         <span class="indicator-label">Submit</span>
                         <span class="indicator-progress">Please wait...

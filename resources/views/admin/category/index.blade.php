@@ -26,8 +26,6 @@
             </ul>
         </div>
     @endif
-
-
     <div class="container">
         <div class="card">
             <div class="card-header border-0 pt-6">
@@ -215,13 +213,7 @@
                         render: function(data, type, full, meta) {
                             return "<img src='" + data + "' width='100px' height='100px' style='border-radius: 10px' alt='photo'>";
                         }
-                    },
-                    // { data: 'price', name: 'price' },
-                    // { data: 'offer_percentage', name: 'offer_percentage' },
-                    // { data: 'discount', name: 'discount' },
-                    // { data: 'start_date', name: 'start_date' },
-                    // { data: 'end_date', name: 'end_date' },
-                    // { data: 'stock', name: 'stock' },
+                    },               
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
