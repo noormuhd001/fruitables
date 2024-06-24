@@ -4,7 +4,6 @@ namespace App\Services\Admin\Productmanagement;
 
 use App\Models\categories;
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductManagementService
@@ -28,6 +27,7 @@ class ProductManagementService
         $product->stock = $data->stock;
         $product->price = $data->price;
         $product->SKU = str::uuid(); // Ensure 'Str' is correctly imported
+        $product->slug = str::slug($product->SKU . ' ' . $product->category . ' ' . now());
 
         // Handle file upload if you have a photo field
         if ($data->hasFile('photo')) {
@@ -50,7 +50,8 @@ class ProductManagementService
             'category' => $category,
         ];
     }
-    public function update($data){
+    public function update($data)
+    {
         $id = $data->id;
         $product = Product::findorfail($id);
         $product->name = $data->name;
@@ -64,7 +65,8 @@ class ProductManagementService
         return $product;
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $product = product::findorfail($id);
         $product->delete();
 

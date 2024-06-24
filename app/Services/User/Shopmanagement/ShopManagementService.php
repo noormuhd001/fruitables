@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class ShopManagementService
 {
  public function getdata($id){
-    $review = Review::where('product_id',$id)->get();
+    
     $categories = categories::all();
-    $product = Product::findOrFail($id);
+    $product = Product::where('slug',$id)->first();
+    $review = Review::where('product_id',$product->id)->get();
     $offerproducts = offer::all();
     $allproducts = Product::all();
 
@@ -28,12 +29,13 @@ class ShopManagementService
  }
 
  public function getofferdata($id){
-    $review = Review::where('product_id',$id)->get();
+   
     $categories = categories::all();
-    $offer = offer::findOrFail($id);
+    $offer = offer::where('slug',$id)->first();
+    $review = Review::where('product_id',$offer->id)->get();
     $offerproducts = offer::all();
     $allproducts = Product::all();
-
+ 
     return [
         'offer' => $offer,
         'categories' => $categories,
