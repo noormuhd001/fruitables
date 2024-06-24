@@ -22,8 +22,8 @@
     <link href="{{ asset('Admin/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     <style>
-        .class{
-          float: right;
+        .class {
+            float: right;
         }
     </style>
 </head>

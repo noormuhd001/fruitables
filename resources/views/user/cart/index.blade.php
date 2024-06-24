@@ -5,7 +5,6 @@
     @php
         $subtotal = 0;
     @endphp
-
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Cart</h1>
@@ -16,8 +15,6 @@
         </ol>
     </div>
     <!-- Single Page Header End -->
-
-
     <!-- Cart Page Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
@@ -82,7 +79,6 @@
                     @endif
                 </table>
             </div>
-
             <div class="mt-5">
                 <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
                 <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply
@@ -122,7 +118,6 @@
                                 class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
                                 type="button">Proceed Checkout</button>
                         </a>
-
                     </div>
                 </div>
             </div>

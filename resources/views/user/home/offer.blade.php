@@ -46,7 +46,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-lg-12">
                                     <div class="position-relative">
                                         <img src="{{ asset('User/img/banner-fruits.jpg') }}" class="img-fluid w-100 rounded"
@@ -66,14 +65,16 @@
                                         <div class="rounded position-relative fruite-item">
                                             <form action="{{ route('user.offeraddtocart') }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{ $products->id }}" id="id">
+                                                <input type="hidden" name="id" value="{{ $products->id }}"
+                                                    id="id">
                                                 <a href="{{ route('offeritem.view', ['id' => $products->slug]) }}">
                                                     <div class="fruite-img">
-                                                        <img src="{{ asset($products->photo) }}" class="img-fluid w-100 rounded-top" alt="img">
+                                                        <img src="{{ asset($products->photo) }}"
+                                                            class="img-fluid w-100 rounded-top" alt="img">
                                                     </div>
                                                 </a>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                     style="top: 10px; left: 10px;">
+                                                    style="top: 10px; left: 10px;">
                                                     {{ $products->category }}
                                                 </div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -81,7 +82,8 @@
                                                     <p>{{ $products->description }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">
-                                                            <span style="text-decoration: line-through;">{{ $products->price }}/kg</span>
+                                                            <span
+                                                                style="text-decoration: line-through;">{{ $products->price }}/kg</span>
                                                             <span class="text-danger ms-2">
                                                                 {{ $products->discount }}/kg
                                                             </span>
@@ -90,7 +92,9 @@
                                                                 {{ $products->offer_percentage }}% off
                                                             </span>
                                                         </p>
-                                                        <input type="submit" class="btn border border-secondary rounded-pill px-3 text-primary" value="Add to cart">
+                                                        <input type="submit"
+                                                            class="btn border border-secondary rounded-pill px-3 text-primary"
+                                                            value="Add to cart">
                                                     </div>
                                                 </div>
                                             </form>
@@ -110,7 +114,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

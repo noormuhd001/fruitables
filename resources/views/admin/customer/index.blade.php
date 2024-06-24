@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('breadcrumbs')
-{{ Breadcrumbs::render('customer.index') }}
+    {{ Breadcrumbs::render('customer.index') }}
 @endsection
 @section('section')
     @if ($errors->any())
@@ -42,7 +42,8 @@
                             </svg>
                         </span>
                         <input type="text" data-kt-user-table-filter="search"
-                            class="form-control form-control-solid w-250px ps-14" placeholder="Search user" id="product-search" name="product-search" />
+                            class="form-control form-control-solid w-250px ps-14" placeholder="Search user"
+                            id="product-search" name="product-search" />
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -62,12 +63,9 @@
                                 </svg>
                             </span>
                             Add User</button>
-
                     </div>
-
                     <div class="modal fade" id="kt_modal_export_users" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered mw-650px">
-
                         </div>
                     </div>
                     <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
@@ -160,7 +158,7 @@
                             <th class="text-end min-w-100px">Actions</th>
                         </tr>
                     </thead>
-                
+
                     <tbody class="text-gray-600 fw-bold">
                     </tbody>
                 </table>
@@ -177,11 +175,10 @@
             </ul>
         </div>
     @endif
-
 @endsection
 
 @push('script')
-<script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
+    <script src="{{ asset('Admin\assets\js\admin\adduser.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script>
@@ -195,47 +192,54 @@
                     url: "{{ route('customer.getdata') }}",
                     type: 'GET',
                     data: function(d) {
-                    
+
                         d.searchValue = $('#product-search').val();
                         // Add other filters here if needed
                     }
                 },
-                columns: [
-                    { data: 'name', name: 'name' },
-                  
-                    // { 
-                    //     data: 'photo', 
-                    //     name: 'photo',
-                    //     render: function(data, type, full, meta) {
-                    //         return "<img src='" + data + "' width='100px' height='100px' style='border-radius: 10px' alt='photo'>";
-                    //     }
-                    // },
-                  
-                    { data: 'phone', name: 'phone' },
-                    { data: 'accountstatus', name: 'accountstatus' ,
-                    render: function(data, type, full, meta) {
-            if (data == 0) {
-                return '<span class="badge bg-success">Active</span>';
-            } else if (data == 1) {
-                return '<span class="badge bg-danger">Inactive</span>';
-            } else {
-                return '<span class="badge bg-secondary">Unknown</span>';
-            }
-        }
-    },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'email_verified_at', name: 'email_verified_at' },                  
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                columns: [{
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'accountstatus',
+                        name: 'accountstatus',
+                        render: function(data, type, full, meta) {
+                            if (data == 0) {
+                                return '<span class="badge bg-success">Active</span>';
+                            } else if (data == 1) {
+                                return '<span class="badge bg-danger">Inactive</span>';
+                            } else {
+                                return '<span class="badge bg-secondary">Unknown</span>';
+                            }
+                        }
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'email_verified_at',
+                        name: 'email_verified_at'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
-            });      
+            });
 
             // Custom search input
             $('#product-search').on('keyup', function() {
                 table.search($(this).val()).draw();
             });
-   
+
         });
     </script>
 @endpush
-
-
