@@ -40,7 +40,7 @@ class OrderManagementService
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->quantity;
             $orderItem->photo = $item->photo; // Adjust as needed
-            $orderItem->slug = $order->slug;
+            // $orderItem->slug = $order->slug;
             // Save the order item to the database
             $orderItem->save();
         }
@@ -62,7 +62,7 @@ class OrderManagementService
     public function orderview($slug){
 
       $orders = order::where('slug',$slug)->first();
-      $orderitems = orderitem::where('slug',$slug)->get();
+      $orderitems = orderitem::where('order_id',$orders->id)->get();
 
       return [
        'orders' => $orders,
