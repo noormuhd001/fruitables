@@ -3,9 +3,9 @@
 @push('style')
     <style>
         .fixed-dimensions {
-            width: 100%;          
-            height: 300px;            
-            object-fit: cover;          
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
     </style>
 @endpush
@@ -71,8 +71,10 @@
                                     @foreach ($offerproducts as $offerproduct)
                                         <div class="d-flex align-items-center justify-content-start mb-3">
                                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded"
-                                                    alt="">
+                                                <a href="{{ route('offeritem.view', ['id' => $offerproduct->slug]) }}">
+                                                    <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded"
+                                                        alt="">
+                                                </a>
                                             </div>
                                             <div>
                                                 <h6 class="mb-2">{{ $offerproduct->title }}</h6>

@@ -136,8 +136,9 @@
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ $products->photo }}" class="fixed-dimensions rounded-top"
-                                                        alt="img">
+                                                    <a href="{{ route('item.view', ['id' => $products->slug]) }}">
+                                                        <img src="{{ $products->photo }}"
+                                                            class="fixed-dimensions rounded-top" alt="img"></a>
                                                 </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                                     style="top: 10px; left: 10px;">{{ $categories->name }}</div>
