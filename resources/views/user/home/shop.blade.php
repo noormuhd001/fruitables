@@ -1,5 +1,15 @@
 @extends('user.layout.layout')
 
+@push('style')
+    <style>
+        .fixed-dimensions {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Shop</h1>
@@ -61,8 +71,10 @@
                                     @foreach ($offerproducts as $offerproduct)
                                         <div class="d-flex align-items-center justify-content-start mb-3">
                                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                                <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded"
-                                                    alt="">
+                                                <a href="{{ route('offeritem.view', ['id' => $offerproduct->slug]) }}">
+                                                    <img src="{{ asset($offerproduct->photo) }}" class="img-fluid rounded"
+                                                        alt="">
+                                                </a>
                                             </div>
                                             <div>
                                                 <h6 class="mb-2">{{ $offerproduct->title }}</h6>
@@ -97,14 +109,15 @@
                                 @foreach ($product as $products)
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
-                                            <form action="{{ route('user.addtocart') }}" method="POST">
+                                            <form action="{{ route('user.addtocart') }}" method="POST"
+                                                id="addToCartForm-{{ $products->id }}">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $products->id }}"
                                                     id="id">
                                                 <a href="{{ route('item.view', ['id' => $products->slug]) }}">
                                                     <div class="fruite-img">
                                                         <img src="{{ $products->photo }}"
-                                                            class="img-fluid w-100 rounded-top" alt="img">
+                                                            class="fixed-dimensions rounded-top" alt="img">
                                                     </div>
                                                 </a>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
@@ -117,16 +130,22 @@
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">{{ $products->price }}/kg
                                                         </p>
-                                                        <input type="submit"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"
-                                                            value="Add to cart">
+                                                        <button type="button"
+                                                            class="btn border border-secondary rounded-pill px-3 text-primary addToCartButton"
+                                                            data-id="{{ $products->id }}">
+                                                            Add to cart
+                                                        </button>
                                                     </div>
                                                 </div>
+                                                <div id="successMessage-{{ $products->id }}" class="success-message"
+                                                    style="display:none; color:green; text-align:center">
+                                                    Product added to cart successfully!
+                                                </div>
                                             </form>
-
                                         </div>
                                     </div>
                                 @endforeach
+
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a href="#" class="rounded">&laquo;</a>
@@ -147,3 +166,30 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.addToCartButton').click(function() {
+                var button = $(this);
+                var productId = button.data('id');
+                var form = $('#addToCartForm-' + productId);
+                var formData = form.serialize();
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle success - update the cart icon, show a success message, etc.
+                        $('#successMessage-' + productId).show();
+                    },
+                    error: function(xhr) {
+                        // Handle error - show error message, etc.
+                        alert('Failed to add product to cart.');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

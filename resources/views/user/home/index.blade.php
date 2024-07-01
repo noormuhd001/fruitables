@@ -1,5 +1,19 @@
 @extends('user.layout.layout')
+@push('style')
+    <style>
+        .fixed-dimensions {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
 
+        .carousel-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="container-fluid py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -20,7 +34,7 @@
                         <div class="carousel-inner" role="listbox">
                             @foreach ($product as $index => $products)
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }} rounded">
-                                    <img src="{{ $products->photo }}" class="img-fluid w-100 h-100 bg-secondary rounded"
+                                    <img src="{{ $products->photo }}" class="carousel-image rounded-top "
                                         alt="{{ $products->name }}">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">{{ $products->name }}</a>
                                 </div>
@@ -122,8 +136,9 @@
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ $products->photo }}" class="img-fluid w-100 rounded-top"
-                                                        alt="">
+                                                    <a href="{{ route('item.view', ['id' => $products->slug]) }}">
+                                                        <img src="{{ $products->photo }}"
+                                                            class="fixed-dimensions rounded-top" alt="img"></a>
                                                 </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                                     style="top: 10px; left: 10px;">{{ $categories->name }}</div>

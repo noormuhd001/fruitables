@@ -55,9 +55,9 @@
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
-                                            <input type="text"
+                                            <input type="number"
                                                 class="form-control form-control-sm text-center border-0 quantity-input"
-                                                value="{{ $carts->quantity }}" data-id="{{ $carts->id }}">
+                                                value="{{ $carts->quantity }}" data-id="{{ $carts->id }}" readonly >
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                     <i class="fa fa-plus"></i>
