@@ -29,9 +29,7 @@ class OfferManagementService
             $file->move(public_path('uploads'), $fileName); // Adjust folder path as needed
             $offer->photo = 'uploads/' . $fileName; // Add missing slash
         }
-        $offer->photo = $data->photo;
         $offer->save();
-
         return $offer;
     }
     public function delete($id)
