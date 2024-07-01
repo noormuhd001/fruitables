@@ -1,5 +1,15 @@
 @extends('user.layout.layout')
 
+@push('style')
+    <style>
+        .fixed-dimensions {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
+@endpush
+
 @section('content')
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
@@ -310,7 +320,7 @@
                     @foreach ($allproducts as $data)
                         <div class="border border-primary rounded position-relative vesitable-item">
                             <div class="vesitable-img">
-                                <img src="{{ asset($data->photo) }}" class="img-fluid w-100 rounded-top"
+                                <img src="{{ asset($data->photo) }}" class="fixed-dimensions rounded-top"
                                     alt="{{ $data->name }}">
                             </div>
                             <div class="text-white bg-primary px-3 py-1 rounded position-absolute"

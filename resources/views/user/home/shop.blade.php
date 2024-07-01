@@ -1,5 +1,15 @@
 @extends('user.layout.layout')
 
+@push('style')
+    <style>
+        .fixed-dimensions {
+            width: 100%;          
+            height: 300px;            
+            object-fit: cover;          
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Shop</h1>
@@ -104,7 +114,7 @@
                                                 <a href="{{ route('item.view', ['id' => $products->slug]) }}">
                                                     <div class="fruite-img">
                                                         <img src="{{ $products->photo }}"
-                                                            class="img-fluid w-100 rounded-top" alt="img">
+                                                            class="fixed-dimensions rounded-top" alt="img">
                                                     </div>
                                                 </a>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
