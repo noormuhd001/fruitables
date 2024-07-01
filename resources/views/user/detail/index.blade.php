@@ -2,9 +2,9 @@
 @push('style')
     <style>
         .fixed-dimensions {
-            width: 100%;          
-            height: 300px;            
-            object-fit: cover;          
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
     </style>
 @endpush
@@ -44,15 +44,14 @@
                                 <i class="fa fa-star"></i>
                             </div> --}}
                             <p class="mb-4">{{ $product->basicdescription }}</p>
-                            <form action="{{ route('user.addtocart') }}" method="POST">
-                                @csrf
+                            <form id="addToCartForm">
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" type="button">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" name="quantity"
+                                    <input type="text" name="quantity" id="quantity"
                                         class="form-control form-control-sm text-center border-0" value="1">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-plus rounded-circle bg-light border" type="button">
@@ -60,12 +59,18 @@
                                         </button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="id" id="id" value="{{ $product->id }}">
-                                <input type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"
-                                    value="Add to cart">
+                                <input type="hidden" name="id" id="productId" value="{{ $product->id }}">
+                                <button type="button" class="btn border border-secondary rounded-pill px-3 text-primary"
+                                    onclick="addToCart()">
+                                    Add to Cart
+                                </button>
+                                <div id="successMessage-{{ $product->id }}" class="success-message"
+                                    style="display:none; color:green; text-align:center; float: right; margin-right:80px;">
+                                    Product added to cart successfully!
+                                </div>
                             </form>
-
                         </div>
+
                         <div class="col-lg-12">
                             <nav>
                                 <div class="nav nav-tabs mb-3">
@@ -354,5 +359,33 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        function addToCart() {
+            var quantity = $('#quantity').val();
+            var productId = $('#productId').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('user.addtocart') }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    quantity: quantity,
+                    id: productId
+                },
+                success: function(response) {
+                    // Handle success response here
+                    console.log('Item added to cart successfully!');
+                    $('#successMessage-' + productId).show();
+                    // Optionally update UI or show a success message
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response here
+                    console.error('Error adding item to cart:', error);
+                    // Optionally show an error message
+                }
+            });
+        }
     </script>
 @endpush
