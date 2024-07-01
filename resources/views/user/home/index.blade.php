@@ -6,6 +6,12 @@
             height: 300px;
             object-fit: cover;
         }
+
+        .carousel-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
     </style>
 @endpush
 @section('content')
@@ -28,7 +34,7 @@
                         <div class="carousel-inner" role="listbox">
                             @foreach ($product as $index => $products)
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }} rounded">
-                                    <img src="{{ $products->photo }}" class="img-fluid w-100 h-100 bg-secondary rounded"
+                                    <img src="{{ $products->photo }}" class="carousel-image rounded-top "
                                         alt="{{ $products->name }}">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">{{ $products->name }}</a>
                                 </div>
