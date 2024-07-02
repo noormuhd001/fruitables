@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/submit-review', [ReviewController::class, 'store'])->name('review.post');
     Route::get('/contact', [ReviewController::class, 'contact'])->name('user.contact');
 
+    //contact
+
+    Route::post('/contact',[ReviewController::class,'contactus'])->name('contact.submit');
+
     //cart
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Services\User\Reviewmanagement;
 use App\Models\Review;
+use App\Models\support;
 
 class ReviewManagementService
 {
@@ -15,5 +16,15 @@ class ReviewManagementService
     $review->save();
 
     return $review;
+ }
+
+ public function submit($data){
+   $support = new support();
+   $support->name = $data->name;
+   $support->email = $data->email;
+   $support->message = $data->message;
+   $support->save();
+
+   return $support;
  }
 }
