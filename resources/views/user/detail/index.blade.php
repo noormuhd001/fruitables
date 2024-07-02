@@ -65,8 +65,8 @@
                                     Add to Cart
                                 </button>
                                 <div id="successMessage-{{ $product->id }}" class="success-message"
-                                    style="display:none; color:green; text-align:center; float: right; margin-right:80px;">
-                                    Product added to cart successfully!
+                                    style="display:none; color:green;">
+                                    Added!
                                 </div>
                             </form>
                         </div>
@@ -135,7 +135,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                                <div class="tab-pane" id="nav-mission" role="tabpanel"
+                                    aria-labelledby="nav-mission-tab">
                                     <div class="d-flex">
                                         @foreach ($review as $reviews)
                                             <div class="">
@@ -375,15 +376,11 @@
                     id: productId
                 },
                 success: function(response) {
-                    // Handle success response here
                     console.log('Item added to cart successfully!');
                     $('#successMessage-' + productId).show();
-                    // Optionally update UI or show a success message
                 },
                 error: function(xhr, status, error) {
-                    // Handle error response here
                     console.error('Error adding item to cart:', error);
-                    // Optionally show an error message
                 }
             });
         }

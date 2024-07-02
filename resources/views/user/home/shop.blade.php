@@ -135,11 +135,9 @@
                                                             data-id="{{ $products->id }}">
                                                             Add to cart
                                                         </button>
+                                                        <div class="success-message text-success mt-2" style="display: none;">
+                                                            Added!</div>
                                                     </div>
-                                                </div>
-                                                <div id="successMessage-{{ $products->id }}" class="success-message"
-                                                    style="display:none; color:green; text-align:center">
-                                                    Product added to cart successfully!
                                                 </div>
                                             </form>
                                         </div>
@@ -182,7 +180,7 @@
                     data: formData,
                     success: function(response) {
                         // Handle success - update the cart icon, show a success message, etc.
-                        $('#successMessage-' + productId).show();
+                        form.find('.success-message').show().delay(3000).fadeOut();
                     },
                     error: function(xhr) {
                         // Handle error - show error message, etc.

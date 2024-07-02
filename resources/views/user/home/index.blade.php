@@ -144,14 +144,18 @@
                                                     style="top: 10px; left: 10px;">{{ $categories->name }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $products->name }}</h4>
-                                                    <p>{{ $products->description }}</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p>{{ $products->basicdescription }}</p>
+                                                    <div class="d-flex justify-content-between flex-lg-wrap" id="show">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ $products->price }} / kg
                                                         </p>
                                                         <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
+                                                            class="btn border border-secondary rounded-pill px-3 text-primary add-to-cart"
+                                                            data-id="{{ $products->id }}">
+                                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                        </a>
+                                                        <div class="success-message text-success mt-2"
+                                                            style="display: none;">
+                                                            Added!</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,3 +217,35 @@
     </div>
     <!-- Featurs End -->
 @endsection
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').on('click', function(e) {
+                e.preventDefault();
+                var productId = $(this).data('id');
+                var form = $('#show');
+                $.ajax({
+                    url: '{{ route('user.addtocart') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: productId
+                    },
+                    success: function(response) {
+                        // Assuming you get a success response, show a fade-in effect
+                        form.find('.success-message').show().delay(3000).fadeOut();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the error
+                        $('<div class="alert alert-danger">Failed to add item to cart.</div>')
+                            .hide().appendTo('body').fadeIn(1000).delay(2000).fadeOut(1000,
+                                function() {
+                                    $(this).remove();
+                                });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

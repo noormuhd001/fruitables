@@ -56,7 +56,7 @@
                             </div> --}}
                             <p class="mb-4">{{ $offer->description }}</p>
 
-                            <form action="{{ route('user.offeraddtocart') }}" method="POST">
+                            <form action="{{ route('user.offeraddtocart') }}" method="POST" class="offer-form">
                                 @csrf
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -75,7 +75,9 @@
                                 <input type="hidden" name="id" id="id" value="{{ $offer->id }}">
                                 <input type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"
                                     value="Add to cart">
+                                <div class="success-message text-success mt-2" style="display: none;">Added!</div>
                             </form>
+
 
                         </div>
                         <div class="col-lg-12">
@@ -369,4 +371,47 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle form submission via AJAX
+            $('.offer-form').on('submit', function(e) {
+                e.preventDefault(); // Prevent the default form submission
+    
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = form.serialize();
+    
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    success: function(response) {
+                        // Show the success message
+                        form.find('.success-message').show().delay(3000).fadeOut();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the error response here
+                        console.error(error);
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+            });
+    
+            // Handle quantity increment and decrement
+            $('.btn-minus').on('click', function() {
+                var input = $(this).closest('.quantity').find('input[name="quantity"]');
+                var value = parseInt(input.val()) - 1;
+                if (value < 1) value = 1;
+                input.val(value);
+            });
+    
+            $('.btn-plus').on('click', function() {
+                var input = $(this).closest('.quantity').find('input[name="quantity"]');
+                var value = parseInt(input.val()) + 1;
+                input.val(value);
+            });
+        });
+    </script>
+    
 @endpush
