@@ -63,7 +63,8 @@
                                 @foreach ($offer as $products)
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
-                                            <form action="{{ route('user.offeraddtocart') }}" method="POST">
+                                            <form action="{{ route('user.offeraddtocart') }}" method="POST"
+                                                class="offer-form">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $products->id }}"
                                                     id="id">
@@ -96,11 +97,14 @@
                                                             class="btn border border-secondary rounded-pill px-3 text-primary"
                                                             value="Add to cart">
                                                     </div>
+                                                    <div class="success-message text-success mt-2" style="display: none;">
+                                                        Added!</div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 @endforeach
+
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a href="#" class="rounded">&laquo;</a>
@@ -121,3 +125,31 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.offer-form').on('submit', function(e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+                        form.find('.success-message').show().delay(3000).fadeOut();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

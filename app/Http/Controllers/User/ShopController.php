@@ -59,7 +59,7 @@ class ShopController extends Controller
         try {
             $message = $this->shopmanagementservice->addToCart($request->id,$request);
             if ($message) {
-                return redirect()->back()->with('success', $message);
+                return response()->json(['success' => true, 'message' => 'Product added to cart successfully!']);
             } else {
                 return abort(404);
             }
