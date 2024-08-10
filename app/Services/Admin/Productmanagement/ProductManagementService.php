@@ -53,17 +53,29 @@ class ProductManagementService
     public function update($data)
     {
         $id = $data->id;
-        $product = Product::findorfail($id);
+        $product = Product::findOrFail($id);
+
+        // Updating text fields
         $product->name = $data->name;
         $product->price = $data->price;
         $product->category = $data->category;
         $product->basicdescription = $data->basic_description;
         $product->fulldescription = $data->full_description;
         $product->stock = $data->stock;
+
+        // Handling the photo upload
+        if ($data->hasFile('photo')) {
+            $photo = $data->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('uploads'), $photoName);
+            $product->photo = '/uploads/' . $photoName;
+        }
+
         $product->save();
 
         return $product;
     }
+
 
     public function delete($id)
     {
