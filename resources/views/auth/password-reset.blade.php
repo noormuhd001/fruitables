@@ -16,11 +16,17 @@
         content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
-    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{ asset('Admin/assets/media/logos/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+        rel="stylesheet">
     <link href="{{ asset('Admin/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('Admin/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('User/lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('User/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('User/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="{{ asset('User/css/style.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
@@ -30,13 +36,13 @@
             style="background-image: url({{ asset('Admin/assets/media/illustrations/sketchy-1/14.png') }})">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a href="" class="mb-12">
-                    <h1 class="text-primary display-6 h-80px">Fruitables</h1>
+                    <h1 class="mb-5 display-3 text-primary">Fruitables</h1>
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    <form class="form w-100" id="resetpassword" >
+                    <form class="form w-100" id="resetpassword">
                         @csrf
                         <div class="text-center mb-10">
-                           
+
                             <input type="hidden" name="useremail" id="useremail" value="{{ $useremail }}">
                             <h1 class="text-dark mb-3">Setup New Password</h1>
                             <div class="text-gray-400 fw-bold fs-4">Already have reset your password ?
@@ -45,14 +51,19 @@
                         </div>
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark" for="password">Password</label>
-                            <input id="password" class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="password" name="password" value="{{ old('password') }}" />
+                            <input id="password"
+                                class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror"
+                                type="password" name="password" value="{{ old('password') }}" />
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="fv-row mb-10">
-                            <label class="form-label fs-6 fw-bolder text-dark" for="password">Confirm New Password</label>
-                            <input id="confirmpassword" class="form-control form-control-lg form-control-solid @error('confirmpassword') is-invalid @enderror" type="password" name="confirmpassword" value="{{ old('confirmpassword') }}" />
+                            <label class="form-label fs-6 fw-bolder text-dark" for="password">Confirm New
+                                Password</label>
+                            <input id="confirmpassword"
+                                class="form-control form-control-lg form-control-solid @error('confirmpassword') is-invalid @enderror"
+                                type="password" name="confirmpassword" value="{{ old('confirmpassword') }}" />
                             @error('confirmpassword')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -61,12 +72,15 @@
                             <span id="message"></span>
                             <button type="button" class="btn-close"></button>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" id="submitBtn" class="btn btn-lg btn-primary w-50 mb-5">
+                        <div class="text-center d-flex justify-content-center">
+                            <button type="submit" id="submitBtn" class="btn btn-lg btn-primary me-3 w-50 mb-5">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
                             </button>
+                            <a href="{{ route('loginpage') }}"
+                                class="btn btn-lg btn-secondary me-3 w-50 mb-5">Cancel</a>
                         </div>
                     </form>
                 </div>
