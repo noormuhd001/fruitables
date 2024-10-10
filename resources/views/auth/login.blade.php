@@ -14,7 +14,7 @@
     <meta property="og:url" content="#" />
     <meta property="og:site_name" content="Fruitables" />
     <link rel="canonical" href="#" />
-    <link rel="shortcut icon" href="{{ asset('Admin/assets/media/logos/favicon.ico') }}" />
+    <link rel="icon" href="{{ asset('Admin/assets/media/illustrations/sketchy-1/main-logo.png') }}" type="image/png">
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
         rel="stylesheet">
