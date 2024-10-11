@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop</h1>
+        <h1 class="text-center display-6">Offers</h1>
         <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Shop</a></li>
-            <li class="breadcrumb-item active text-white">Featured Products</li>
+            <li class="breadcrumb-item active">Offers</li>
         </ol>
     </div>
 
@@ -156,7 +155,7 @@
                         button.prop('disabled', true).text('Added')
                             .removeClass(
                                 'btn border border-secondary rounded-pill px-3 text-primary addToCartButton'
-                                )
+                            )
                             .addClass('btn btn-success rounded-pill px-3');
                         // Optionally display success message
                         // form.find('.success-message').show();

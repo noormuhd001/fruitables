@@ -12,11 +12,10 @@
 
 @section('content')
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop</h1>
+        <h1 class="text-center  display-6">Shop</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Shop</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item active ">Shop</li>
         </ol>
     </div>
 
@@ -191,7 +190,7 @@
                         button.prop('disabled', true).text('Added');
                         button.removeClass(
                                 'btn border border-secondary rounded-pill px-3 text-primary addToCartButton'
-                                )
+                            )
                             .addClass('btn btn-success rounded-pill px-3');
                     },
                     error: function(xhr) {
