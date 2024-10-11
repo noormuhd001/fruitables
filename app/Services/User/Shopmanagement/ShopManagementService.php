@@ -47,8 +47,11 @@ class ShopManagementService
 
  public function offerview(){
     $offer = offer::all();
+    $cart = Cart::where('user_id', auth()->id())->get(); 
+
     return [
       'offer' => $offer,
+      'cart' => $cart
     ];
  }
 

@@ -148,14 +148,22 @@
                                                     <div class="d-flex justify-content-between flex-lg-wrap" id="show">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ $products->price }} / kg
                                                         </p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary add-to-cart"
-                                                            data-id="{{ $products->id }}">
-                                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
-                                                        </a>
-                                                        <div class="success-message text-success mt-2"
-                                                            style="display: none;">
-                                                            Added!</div>
+                                                        @php
+                                                            $isInCart = $cart->contains('product_id', $products->id); // Assuming $cart is a collection of items
+                                                        @endphp
+
+                                                        @if ($isInCart)
+                                                            <button type="button" class="btn btn-success rounded-pill px-3"
+                                                                disabled>
+                                                                Added
+                                                            </button>
+                                                        @else
+                                                            <button type="button"
+                                                                class="btn border border-secondary rounded-pill px-3 text-primary addToCartButton"
+                                                                data-id="{{ $products->id }}">
+                                                                Add to cart
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,10 +229,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.add-to-cart').on('click', function(e) {
+            $('.addToCartButton').on('click', function(e) {
+                var button = $(this);
+                var productId = button.data('id');
+                var form = $('#addToCartForm-' + productId);
+                var formData = form.serialize();
                 e.preventDefault();
-                var productId = $(this).data('id');
-                var form = $('#show');
                 $.ajax({
                     url: '{{ route('user.addtocart') }}',
                     method: 'POST',
@@ -234,7 +244,11 @@
                     },
                     success: function(response) {
                         // Assuming you get a success response, show a fade-in effect
-                        form.find('.success-message').show().delay(3000).fadeOut();
+                        button.prop('disabled', true).text('Added');
+                        button.removeClass(
+                                'btn border border-secondary rounded-pill px-3 text-primary addToCartButton'
+                            )
+                            .addClass('btn btn-success rounded-pill px-3');
                     },
                     error: function(xhr, status, error) {
                         // Handle the error

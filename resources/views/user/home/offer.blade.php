@@ -74,10 +74,10 @@
                                                             class="img-fluid w-100 rounded-top" alt="img">
                                                     </div>
                                                 </a>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                {{-- <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                                     style="top: 10px; left: 10px;">
                                                     {{ $products->category }}
-                                                </div>
+                                                </div> --}}
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $products->title }}</h4>
                                                     <p>{{ $products->description }}</p>
@@ -93,12 +93,23 @@
                                                                 {{ $products->offer_percentage }}% off
                                                             </span>
                                                         </p>
-                                                        <input type="submit"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"
-                                                            value="Add to cart">
+                                                        @php
+                                                            $isInCart = $cart->contains('product_id', $products->id); // Assuming $cart is a collection of items
+                                                        @endphp
+
+                                                        @if ($isInCart)
+                                                            <button type="button" class="btn btn-success rounded-pill px-3"
+                                                                disabled>
+                                                                Added
+                                                            </button>
+                                                        @else
+                                                            <button type="submit"
+                                                                class="btn border border-secondary rounded-pill px-3 text-primary addToCartButton"
+                                                                data-id="{{ $products->id }}">
+                                                                Add to cart
+                                                            </button>
+                                                        @endif
                                                     </div>
-                                                    <div class="success-message text-success mt-2" style="display: none;">
-                                                        Added!</div>
                                                 </div>
                                             </form>
                                         </div>
@@ -129,26 +140,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Handle the offer form submission
             $('.offer-form').on('submit', function(e) {
                 e.preventDefault(); // Prevent the default form submission
 
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = form.serialize();
+                const form = $(this);
+                const url = form.attr('action');
+                const button = form.find('.addToCartButton'); // Find the button within the current form
+                const formData = form.serialize(); // Serialize the form data
 
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: formData,
-                    success: function(response) {
-                        console.log(response);
-                        form.find('.success-message').show().delay(3000).fadeOut();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
+                // Send the AJAX POST request
+                $.post(url, formData)
+                    .done(function(response) {
+                        // Disable the button and update its text after successful submission
+                        button.prop('disabled', true).text('Added')
+                            .removeClass(
+                                'btn border border-secondary rounded-pill px-3 text-primary addToCartButton'
+                                )
+                            .addClass('btn btn-success rounded-pill px-3');
+                        // Optionally display success message
+                        // form.find('.success-message').show();
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.error('Error:', error);
                         alert('Something went wrong. Please try again.');
-                    }
-                });
+                    });
             });
         });
     </script>
