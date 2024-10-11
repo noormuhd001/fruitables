@@ -7,11 +7,10 @@
     @endphp
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Cart</h1>
+        <h1 class="text-center display-6">Cart</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Cart</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Cart</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -57,7 +56,7 @@
                                             </div>
                                             <input type="number"
                                                 class="form-control form-control-sm text-center border-0 quantity-input"
-                                                value="{{ $carts->quantity }}" data-id="{{ $carts->id }}" readonly >
+                                                value="{{ $carts->quantity }}" data-id="{{ $carts->id }}" readonly>
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                     <i class="fa fa-plus"></i>

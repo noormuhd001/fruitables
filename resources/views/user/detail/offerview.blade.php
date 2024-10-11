@@ -13,11 +13,11 @@
 @section('content')
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop Detail</h1>
+        <h1 class="text-center display-6">Offer Detail</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Shop Detail</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('user.shop') }}">Shop</a></li>
+            <li class="breadcrumb-item active">Offer Detail</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -377,11 +377,11 @@
             // Handle form submission via AJAX
             $('.offer-form').on('submit', function(e) {
                 e.preventDefault(); // Prevent the default form submission
-    
+
                 var form = $(this);
                 var url = form.attr('action');
                 var formData = form.serialize();
-    
+
                 $.ajax({
                     type: 'POST',
                     url: url,
@@ -397,7 +397,7 @@
                     }
                 });
             });
-    
+
             // Handle quantity increment and decrement
             $('.btn-minus').on('click', function() {
                 var input = $(this).closest('.quantity').find('input[name="quantity"]');
@@ -405,7 +405,7 @@
                 if (value < 1) value = 1;
                 input.val(value);
             });
-    
+
             $('.btn-plus').on('click', function() {
                 var input = $(this).closest('.quantity').find('input[name="quantity"]');
                 var value = parseInt(input.val()) + 1;
@@ -413,5 +413,4 @@
             });
         });
     </script>
-    
 @endpush

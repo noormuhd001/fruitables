@@ -1,5 +1,8 @@
 @extends('user.layout.layout')
+@push('style')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@endpush
 @section('content')
     @php
         $subtotal = 0;
@@ -139,8 +142,9 @@
                             value="{{ $subtotal > 1000 ? $subtotal : $subtotal + 50 }}">
                         <div class="form-check my-3">
                             <input class="form-check-input bg-primary border-0" type="checkbox" id="Delivery-1"
-                                name="Delivery" value="Delivery">
-                            <label class="form-check-label" for="Delivery-1">Cash On Delivery</label>
+                                name="delivery" value="Delivery">
+                            <label class="form-check-label" for="Delivery-1">Cash On Delivery</label> (<small>Currently
+                                We Only Have Cash On Delivery </small>)
                         </div>
                         <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                             <button type="submit" id="submitBtn"

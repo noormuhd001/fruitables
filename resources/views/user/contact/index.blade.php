@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Contact</h1>
+        <h1 class="text-center display-6">Contact</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Contact</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Contact</li>
         </ol>
     </div>
     <!-- Contact Start -->
@@ -43,7 +42,7 @@
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-                            
+
                             <textarea name="message" class="w-100 form-control border-0 mb-4" rows="5" cols="10"
                                 placeholder="Your Message" required>{{ old('message') }}</textarea>
                             @error('message')

@@ -16,9 +16,13 @@ class HomeManagementService
 
         $category = categories::all();
         $product = Product::all();
+        $cart = Cart::where('user_id', auth()->id())->get(); 
+
         return [
             'product' => $product,
             'category' => $category,
+            'cart' => $cart
+
         ];
     }
 
@@ -27,11 +31,12 @@ class HomeManagementService
         $product = Product::all();
         $offerproducts = offer::all();
         $categories = categories::all();
-
+        $cart = Cart::where('user_id', auth()->id())->get(); 
         return [
             'product' => $product,
             'categories' => $categories,
-            'offerproducts' => $offerproducts
+            'offerproducts' => $offerproducts,
+            'cart' => $cart
         ];
     }
 

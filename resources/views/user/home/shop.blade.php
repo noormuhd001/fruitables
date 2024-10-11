@@ -12,11 +12,10 @@
 
 @section('content')
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop</h1>
+        <h1 class="text-center  display-6">Shop</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Shop</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Home</a></li>
+            <li class="breadcrumb-item active ">Shop</li>
         </ol>
     </div>
 
@@ -130,13 +129,22 @@
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">{{ $products->price }}/kg
                                                         </p>
-                                                        <button type="button"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary addToCartButton"
-                                                            data-id="{{ $products->id }}">
-                                                            Add to cart
-                                                        </button>
-                                                        <div class="success-message text-success mt-2" style="display: none;">
-                                                            Added!</div>
+                                                        @php
+                                                            $isInCart = $cart->contains('product_id', $products->id); // Assuming $cart is a collection of items
+                                                        @endphp
+
+                                                        @if ($isInCart)
+                                                            <button type="button" class="btn btn-success rounded-pill px-3"
+                                                                disabled>
+                                                                Added
+                                                            </button>
+                                                        @else
+                                                            <button type="button"
+                                                                class="btn border border-secondary rounded-pill px-3 text-primary addToCartButton"
+                                                                data-id="{{ $products->id }}">
+                                                                Add to cart
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </form>
@@ -179,8 +187,11 @@
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        // Handle success - update the cart icon, show a success message, etc.
-                        form.find('.success-message').show().delay(3000).fadeOut();
+                        button.prop('disabled', true).text('Added');
+                        button.removeClass(
+                                'btn border border-secondary rounded-pill px-3 text-primary addToCartButton'
+                            )
+                            .addClass('btn btn-success rounded-pill px-3');
                     },
                     error: function(xhr) {
                         // Handle error - show error message, etc.
